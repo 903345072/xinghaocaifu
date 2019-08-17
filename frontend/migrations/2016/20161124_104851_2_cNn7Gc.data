@@ -1,0 +1,2 @@
+a:4:{s:4:"user";s:8:"ChisWill";s:3:"sql";s:48:"ALTER TABLE `retail`
+ADD UNIQUE INDEX (`code`) ;";s:4:"desc";s:6:"update";s:7:"warning";a:0:{}}

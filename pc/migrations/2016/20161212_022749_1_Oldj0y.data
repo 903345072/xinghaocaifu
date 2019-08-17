@@ -1,0 +1,8 @@
+a:4:{s:4:"user";s:2:"rh";s:3:"sql";s:366:"CREATE TABLE `user_action` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL COMMENT '用户ID',
+  `target_id` int(11) NOT NULL COMMENT '目标ID',
+  `type` tinyint(4) DEFAULT '1' COMMENT '类型：1资讯',
+  `created_at` datetime DEFAULT NULL COMMENT '发生时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;";s:4:"desc";s:17:"增加user_action";s:7:"warning";a:0:{}}

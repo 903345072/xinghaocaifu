@@ -1,0 +1,2 @@
+a:4:{s:4:"user";s:2:"wq";s:3:"sql";s:110:"ALTER TABLE `retail`
+ADD COLUMN `deposit`  decimal(11,0) NULL DEFAULT 0 COMMENT '保证金' AFTER `total_fee`;";s:4:"desc";s:6:"retail";s:7:"warning";a:0:{}}

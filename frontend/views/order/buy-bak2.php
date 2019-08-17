@@ -1,0 +1,594 @@
+<style>
+  body {
+    background: #101419
+  }
+
+  .mui-content {
+    background-color: transparent
+  }
+
+  .tm-trading-total ~ .mui-content {
+    padding-bottom: 50px
+  }
+
+  .layui-layer-btn .layui-layer-btn0 {
+    border-color: #dedede;
+    background-color: #dedede;
+    color: #000
+  }
+
+  .layui-layer-btn .layui-layer-btn1 {
+    border-color: #4898d5;
+    background-color: #4898d5;
+    color: #fff
+  }
+
+  .cs-badge-group {
+    font-size: 0
+  }
+
+  .cs-badge {
+    margin: 0 1px;
+    border-radius: 2px;
+    font-size: 12px;
+    display: inline-block;
+    padding: 0 10px;
+    background-color: #000
+  }
+
+  .cs-badge.mui-active {
+    background-color: #dd3434
+  }
+
+  .cs-badge.uk-width-1-1 {
+    width: 100%
+  }
+
+  .this-modal {
+    width: 100%;
+    display: none
+  }
+
+  .this-modal-wrap {
+    border-radius: 5px;
+    width: 90%;
+  }
+
+  .this-modal-header {
+    font-size: 12px;
+    color: #888;
+    text-align: center;
+    padding: 5px 10px;
+    background-color: #fcfcfc;
+    border-radius: 5px 5px 0 0
+  }
+
+  .this-modal-body {
+    padding: 10px
+  }
+
+  .this-modal-footer .mui-btn {
+    width: 100%;
+    border-radius: 0 0 5px 5px;
+    min-height: 34px;
+    line-height: 32px
+  }
+
+  .chose-gird {
+    margin: 0;
+    padding: 0;
+    list-style: none
+  }
+
+  .chose-gird > li {
+    width: 50%;
+    float: left;
+    padding: 5px
+  }
+
+  .chose-item {
+    display: block;
+    color: #333;
+    font-size: 13px;
+    text-align: center;
+    border-radius: 2px;
+    padding: 2px 0
+  }
+
+  .chose-item.mui-active {
+    background-color: #dd3434;
+    color: #fff
+  }
+
+  .am-text-danger {
+    color: #dd3434;
+  }
+
+</style>
+<div class="main_heads">
+  <a href="javascript:history.go(-1)"><img src="/wap/img/icons_03.png"/></a>
+  <h1><span><?= $header ?></span></h1>
+  <a href="#">规则说明</a>
+</div>
+<div class="pro_list">
+  <ul>
+    <li>
+        <?php if ($model_type == 1) : ?>
+          <p>实盘账户资金</p>
+          <span class="mand"><?= u()->account - u()->blocked_account ?>元</span>
+        <?php else : ?>
+          <p>实盘账户资金</p>
+          <span class="mand"><?= u()->moni_acount - u()->blocked_moni ?>元</span>
+        <?php endif ?>
+      <a href="<?= url(['user/recharge']) ?>">充值</a>
+    </li>
+    <li>
+      <p>美原油<span>(CL1807)</span></p>
+      <i>本时段持仓时间至<?= $productInfo->tradeTime ?></i>
+    </li>
+    <li>
+      <p>购买手数</p>
+      <div class="jd">
+          <?php foreach ($productInfo->priceExtend as $k => $v): ?>
+
+            <span class="gnums_show <?= ($k == 0) ? 'on' : '' ?>"
+                  nums="<?= $v->hand ?>"
+                  data-deposit="<?= $v->deposit ?>"
+                  data-fee="<?= $v->fee ?>"
+                  data-stop_profit_price="<?= $v->stop_profit_price ?>"
+                  data-stop_loss_price="<?= $v->stop_loss_price ?>"
+                  data-point_unit="<?= $v->point_unit ?>"
+            >
+                    <?= $v->hand ?>手
+            </span>
+          <?php endforeach ?>
+      </div>
+      <input type="hidden" name="info[nums]" id="goodsnums" value="1">
+    </li>
+    <li>
+      <p>触发止损金额<span>
+      <?php if ($productInfo->currency == 1) { ?>
+      <?php } else {
+          if ($productInfo->currency == 2) { ?>
+            (美元)
+          <?php } else {
+              if ($productInfo->currency == 3) { ?>
+                (港币)
+              <?php } else {
+                  if ($productInfo->currency == 4) { ?>
+                    (欧元)
+                  <?php }
+              }
+          }
+      } ?>
+    </span></p>
+      <div class="pay"><span id="zshtml"></span></div>
+    </li>
+    <input type="hidden" name="info[stoploss]" id="stoploss" value="200">
+    <li>
+      <p>触发止盈金额<span>
+       <?php if ($productInfo->currency == 1) { ?>
+       <?php } else {
+           if ($productInfo->currency == 2) { ?>
+             (美元)
+           <?php } else {
+               if ($productInfo->currency == 3) { ?>
+                 (港币)
+               <?php } else {
+                   if ($productInfo->currency == 4) { ?>
+                     (欧元)
+                   <?php }
+               }
+           }
+       } ?>
+    </span></p>
+      <div class="pay"><span id="zyhtml"></span></div>
+    </li>
+    <input type="hidden" name="info[stop_profit]" id="zhiying" value="1000">
+
+    <li>
+      <p>市价买入</p>
+      <i id="lastprice">00.00</i>
+    </li>
+  </ul>
+</div>
+<div class="pro_list">
+  <ul>
+    <li>
+        <?php if ($productInfo->currency == 1) { ?>
+          <p>汇率：暂无</p>
+          <i></i>
+          <input type="hidden" id="currency" value="1">
+        <?php } else {
+            if ($productInfo->currency == 2) { ?>
+              <p>汇率：美元兑人民币</p>
+              <i>1美元 = <?= config('USD') ?>人民币</i>
+              <input type="hidden" id="currency" value="<?= config('USD') ?>">
+            <?php } else {
+                if ($productInfo->currency == 3) { ?>
+                  <p>汇率：港币兑人民币</p>
+                  <i>1港币 = <?= config('HKD') ?>人民币</i>
+                  <input type="hidden" id="currency" value="<?= config('HKD') ?>">
+                <?php } else {
+                    if ($productInfo->currency == 4) { ?>
+                      <p>汇率：欧元兑人民币</p>
+                      <i>1欧元 = <?= config('EURO') ?>人民币</i>
+                      <input type="hidden" id="currency" value="<?= config('EURO') ?>">
+                    <?php }
+                }
+            }
+        } ?>
+    </li>
+    <li>
+      <p>交易综合费<span>(元)</span></p>
+      <i id="jiaoyifei"></i>
+    </li>
+    <li>
+      <p>积分抵扣<span>(积分<?= $points ?>，满1000可用)</span></p>
+      <select id="points" class="pay1" name="info[points]" onchange="use_discount()">
+        <option value="0">不使用积分</option>
+          <?php if ($points >= 1000): ?>
+            <option value="10">1000(可抵扣10元)</option>
+          <?php endif; ?>
+          <?php if ($points >= 2000): ?>
+            <option value="20">2000(可抵扣20元)</option>
+          <?php endif; ?>
+          <?php if ($points >= 3000): ?>
+            <option value="30">3000(可抵扣30元)</option>
+          <?php endif; ?>
+      </select>
+    </li>
+    <li>
+      <p>冻结保证金<span>(元)</span></p>
+      <i id="baozhengjin"></i>
+    </li>
+    <li>
+      <p>合计<span>(元)</span></p>
+      <i id="totalprice"></i>
+    </li>
+  </ul>
+</div>
+<div class="btn">
+  <img src="/wap/img//md_03.jpg"/>
+  <p>买跌</p>
+</div>
+<p class="fot">*实盘交易时会为您匹配合作投资人，执行您的买卖指令并与您共享收益 共担风险。</p>
+<div class="this-modal" id="modal-1">
+  <div class="this-modal-header">
+    请选择<font color="#000"><strong>触发</strong></font>止损金额
+  </div>
+  <div class="this-modal-body">
+    <ul class="chose-gird mui-clearfix" id="zhisun_modal">
+
+    </ul>
+  </div>
+  <div class="this-modal-footer">
+    <a class="mui-btn mui-btn-theme" href="Javascript:" onclick="layer.closeAll();">
+      确定
+    </a>
+  </div>
+</div>
+<div class="null"></div>
+<?= $this->render('../layouts/_footer') ?>
+<script type="text/javascript" src="/wap/js/js.js"></script>
+
+<script type="text/javascript">
+  //mui.init();
+  var tempNums = {};
+  var nowType = 1;
+  var cur = '人民币:';
+  switch (parseInt("<?=$productInfo->currency?>")) {
+    case 2:
+      cur = '$ ';
+      break;
+    case 3:
+      cur = 'HK$ ';
+      break;
+    case 4:
+      cur = '€ ';
+      break;
+    default:
+      break;
+  }
+
+  var gnums_idnex = 0;
+
+  function use_discount() {
+    $('.gnums_show').eq(gnums_idnex).click();
+  }
+
+  $(function () {
+    var requestObj1 = GetRequest();
+    nowType = requestObj1.rise_fall;
+    if (requestObj1.rise_fall == 1) {
+      $('.sureFall').hide();
+    } else {
+      $('.sureRise').hide();
+    }
+
+    //默认值
+    var newnums = parseInt($('.gnums_show').attr('nums'));
+    var fee = parseFloat($('.gnums_show').data('fee'));
+    var deposit = parseFloat($('.gnums_show').data('deposit'));
+    var points = parseInt($("#points").val());
+    var currency = $('#currency').val();
+    tempNums.curWay = currency;
+    if (currency == 1) {
+      $('#jiaoyifei').html(Math.ceil(fee) - points);
+      $('#charge').val(Math.ceil(fee) - points);
+      $('#baozhengjin').html((deposit * newnums).toFixed(2));
+      $('#frozen').val((deposit * newnums).toFixed(2));
+      var totalprice = deposit * newnums + fee;
+    } else {
+      $('#jiaoyifei').html((Math.ceil(currency * fee) - points) + '(' + cur + (fee - points / currency).toFixed(2) + ')');
+      $('#charge').val(Math.ceil(currency * fee) - points);
+      $('#baozhengjin').html(((currency * (deposit * newnums).toFixed(2)).toFixed(2)) + '($' + (deposit * newnums).toFixed(2) + ')');
+      $('#frozen').val(((currency * (deposit * newnums).toFixed(2)).toFixed(2)));
+      var totalprice = (currency * deposit * newnums) + (currency * fee);
+    }
+    $('#totalprice').html(totalprice.toFixed(2));
+    $('#goodsnums').val(newnums);
+    var zs_data_arr = $('.gnums_show').data('stop_loss_price').split(',');
+    var zy_data_arr = $('.gnums_show').data('stop_profit_price').split(',');
+    $('#zshtml').html('-' + zs_data_arr[0]);
+    $('#zshtml').attr('flag', zs_data_arr[0] + '(人民币：' + (zs_data_arr[0] * Number(currency)) + ')');
+    $('#zyhtml').html(zy_data_arr[0]);
+    $('#zyhtml').attr('flag', zy_data_arr[0] + '(人民币：' + (zy_data_arr[0] * Number(currency)) + ')');
+    var zs_modal = '';
+    var zy_modal = '';
+    for (var i = 0; i < zs_data_arr.length; i++) {
+      var money = zs_data_arr[i] + '(人民币:' + (zs_data_arr[i] * Number(currency)) + ')';
+      zs_modal += '<li><a class="chose-item zhisun_show" flag="' + money + '" href="Javascript:">' + '-' + zs_data_arr[i] + '</a></li>'
+    }
+    for (var i = 0; i < zy_data_arr.length; i++) {
+      var money = zy_data_arr[i] + '(人民币:' + (zy_data_arr[i] * Number(currency)) + ')';
+      zy_modal += '<li><a class="chose-item zhiying_show" flag="' + money + '" href="Javascript:">' + zy_data_arr[i] + '</a></li>'
+    }
+    $('#zhisun_modal').html(zs_modal);
+    $('#zhiying_modal').html(zy_modal);
+
+
+    $('.gnums_show').click(function () {
+      gnums_idnex = $(this).index();
+      $(this).addClass("mui-active").siblings().removeClass("mui-active");
+      var newnums = parseInt($(this).attr('nums'));
+      var fee = parseFloat($(this).data('fee'));
+      var deposit = parseFloat($(this).data('deposit'));
+      var points = parseInt($("#points").val());
+      var currency = $('#currency').val();
+
+      if (currency == 1) {
+        $('#jiaoyifei').html(Math.ceil(fee) - points);
+        $('#charge').val(fee.toFixed(2) - points);
+        $('#baozhengjin').html((deposit * newnums).toFixed(2));
+        $('#frozen').val((deposit * newnums).toFixed(2));
+        var totalprice = deposit * newnums + fee - points;
+      } else {
+        $('#jiaoyifei').html(Math.ceil(currency * fee) - points + '(' + cur + (fee - points / currency).toFixed(2) + ')');
+        $('#charge').val(Math.ceil(currency * fee) - points);
+        $('#baozhengjin').html(((currency * (deposit * newnums).toFixed(2)).toFixed(2)) + '(' + cur + (deposit * newnums).toFixed(2) + ')');
+        $('#frozen').val(((currency * (deposit * newnums).toFixed(2)).toFixed(2)));
+        var totalprice = (currency * deposit * newnums) + (currency * fee) - points;
+      }
+      $('#totalprice').html(totalprice.toFixed(2));
+      $('#goodsnums').val(newnums);
+      //止损止盈modal
+      var zs_data_arr = $(this).data('stop_loss_price').split(',');
+      var zy_data_arr = $(this).data('stop_profit_price').split(',');
+      $('#zshtml').html('-' + parseFloat(zs_data_arr[0]));
+      $('#zshtml').attr('flag', parseFloat(zs_data_arr[0]) + '(人民币：' + (zs_data_arr[0] * Number(currency)).toFixed(2) + ')');
+      $('#zyhtml').html(zy_data_arr[0]);
+      $('#zyhtml').attr('flag', zy_data_arr[0] + '(人民币：' + (zy_data_arr[0] * Number(currency)) + ')');
+      var zs_modal = '';
+      var zy_modal = '';
+      for (var i = 0; i < zs_data_arr.length; i++) {
+        var money = zs_data_arr[i] + '(人民币:' + (zs_data_arr[i] * Number(currency)) + ')';
+        zs_modal += '<li><a class="chose-item zhisun_show" flag="' + money + '" href="Javascript:">' + '-' + parseFloat(zs_data_arr[i]) + '</a></li>'
+      }
+      for (var i = 0; i < zy_data_arr.length; i++) {
+        var money = zy_data_arr[i] + '(人民币:' + (zy_data_arr[i] * Number(currency)) + ')';
+        zy_modal += '<li><a class="chose-item zhiying_show" flag="' + money + '" href="Javascript:">' + parseFloat(zy_data_arr[i]) + '</a></li>'
+      }
+      $('#zhisun_modal').html(zs_modal);
+      $('#zhiying_modal').html(zy_modal);
+
+      tempNums.hand = newnums;
+      tempNums.deposit = deposit;
+      tempNums.fee = fee;
+      tempNums.zsprice = $('#zshtml').html();
+
+    })
+
+    $('.gnums_show').eq(0).click();
+
+    function GetRequest() {
+      var url = location.search; //获取url中"?"符后的字串
+      var theRequest = new Object();
+      if (url.indexOf("?") != -1) {
+        var str = url.substr(1);
+        strs = str.split("&");
+        for (var i = 0; i < strs.length; i++) {
+          theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+        }
+      }
+      return theRequest;
+    }
+
+    $('.save_order_form').click(function () {
+      var requestObj = GetRequest();
+      var nums = $('#goodsnums').val();
+      var zs = parseFloat($('#zshtml').html());
+      var zy = parseFloat($('#zyhtml').html());
+      var product_id = requestObj.product_id;
+      var rise_fall = requestObj.rise_fall;
+
+
+      if ($('#currency').val() == 1) {
+        var ht = '<p class="am-margin-0 am-padding-bottom-sm"><span class="am-text-danger">交易手续费：</span> ' + parseFloat($('#charge').val()).toFixed(2) + '元</p>' +
+          '<p class="am-margin-0 am-padding-bottom-sm"><span class="am-text-danger">触发止损金额：</span>￥ ' + $('#zshtml').attr('flag') + '</p>' +
+          '<p class="am-margin-0 am-padding-bottom-sm"><span class="am-text-danger">止损金额增幅：</span>￥ <span id="zsZF">' + $('#zyhtml').attr('flag') + '</span></p>' +
+          '<p class="am-margin-0 am-padding-bottom-sm"><span class="am-text-danger">最大止损金额：</span>￥ <span id="maxZS">' + $('#zyhtml').attr('flag') + '</span></p>' +
+          '<p class="am-margin-0 am-padding-bottom-sm"><span class="am-text-danger">保证金：</span><span id="alertBZJ">' + $('#frozen').val() + '</span>元</p>' +
+          '<p class="am-margin-0 am-padding-bottom-sm"><span class="am-text-danger">购买的手数：</span> ' + $('#goodsnums').val() + '手</p>' +
+          '<p class="am-margin-0 am-padding-bottom-sm"><span class="am-text-danger">总金额合计：</span>￥  <span id="alertTotal">' + $('#totalprice').html() + '</span>元</p>';
+      } else {
+        var ht = '<p class="am-margin-0 am-padding-bottom-sm"><span class="am-text-danger">交易手续费：</span> ' + parseFloat($('#charge').val()).toFixed(2) + '元</p>' +
+          '<p class="am-margin-0 am-padding-bottom-sm"><span class="am-text-danger">触发止损金额：</span>' + cur + $('#zshtml').attr('flag') + '</p>' +
+          '<p class="am-margin-0 am-padding-bottom-sm"><span class="am-text-danger">止损金额增幅：</span>' + cur + '<span id="zsZF">' + $('#zyhtml').attr('flag') + '</span></p>' +
+          '<p class="am-margin-0 am-padding-bottom-sm"><span class="am-text-danger">最大止损金额：</span>' + cur + '<span id="maxZS">' + $('#zyhtml').attr('flag') + '</span></p>' +
+          '<p class="am-margin-0 am-padding-bottom-sm"><span class="am-text-danger">保证金：</span><span id="alertBZJ">' + $('#frozen').val() + '</span>元</p>' +
+          '<p class="am-margin-0 am-padding-bottom-sm"><span class="am-text-danger">购买的手数：</span> ' + $('#goodsnums').val() + '手</p>' +
+          '<p class="am-margin-0 am-padding-bottom-sm"><span class="am-text-danger">总金额合计：</span><span id="alertTotal">' + $('#totalprice').html() + '</span>元</p>';
+      }
+
+      layer.confirm(ht, {
+        title: '交易详情',
+        btn: ['取消', '确定'] //按钮
+      }, function () {
+        //取消
+        layer.closeAll()
+      }, function () {
+        //确定
+//                if ("<?//=$model_type?>//" == 1) {
+//                    window.location.href = "<?//=url(['order/position'])?>//";
+//                } else {
+//                    window.location.href = "<?//=url(['order/mockTrad'])?>//";
+//                }
+
+        $.ajax({
+          type: "post",
+          url: "/order/ajax-safe-order",
+          data: {
+            hand: nums,
+            stop_profit_price: zy,
+            stop_loss_price: zs,
+            product_id: product_id,
+            rise_fall: rise_fall,
+            points: $("#points").val(),
+            model_type: "<?=$model_type?>",
+          },
+          success: function (result) {
+            if (result.state) {
+              layer.alert(result.info);
+              setTimeout(function () {
+                if ("<?=$model_type?>" == 1) {
+                  window.location.href = "<?=url(['order/position'])?>";
+                } else {
+                  window.location.href = "<?=url(['order/mockTrad'])?>";
+                }
+              }, 2000);
+              //window.location.href = history.go(-1);
+            } else {
+              layer.alert(result.info);
+            }
+          }
+        });
+
+      });
+
+      //alert('参数为'+nums+zy+zs +product_id+rise_fall);
+
+    })
+
+
+    $('#zs-price').on('click', function () {
+      layer.open({
+        type: 1,
+        title: false,
+        closeBtn: 0,
+        shadeClose: true,
+        skin: 'this-modal-wrap',
+        content: $('#modal-1')
+      });
+    });
+
+    // $('#zy-price').on('click', function () {
+    //     layer.open({
+    //         type: 1,
+    //         title: false,
+    //         closeBtn: 0,
+    //         shadeClose: true,
+    //         skin: 'this-modal-wrap',
+    //         content: $('#modal-2')
+    //     });
+    // });
+
+
+    // $('#zhisun_modal').on("click", ".zhisun_show", function () {
+    //     $(".zhisun_show").removeClass("mui-active");
+    //     $('#zshtml').html($(this).html());
+    //     $('#zshtml').attr('flag', $(this).attr('flag'));
+    //     $(this).addClass("mui-active");
+    //
+    //     var curZy = $(".zhiying_show").eq($(this).index());
+    //     $('#zyhtml').html(curZy.html());
+    //     $('#zyhtml').attr('flag', curZy.attr('flag'));
+    // })
+
+    $('#zhisun_modal').on("click", ".zhisun_show", function () {
+      $(".zhisun_show").removeClass("mui-active");
+      $('#zshtml').html($(this).html());
+      $('#zshtml').attr('flag', $(this).attr('flag'));
+      $(this).addClass("mui-active");
+      tempNums.zsprice = $('#zshtml').html();
+
+      var curZy = $(".zhiying_show").eq($('#zhisun_modal .zhisun_show').index(this));
+      $('#zyhtml').html(curZy.html());
+      $('#zyhtml').attr('flag', curZy.attr('flag'));
+
+    })
+
+    // $('#zhiying_modal').on("click", ".zhiying_show", function () {
+    //     $(".zhiying_show").removeClass("mui-active");
+    //     $('#zyhtml').html($(this).html());
+    //     $('#zyhtml').attr('flag', $(this).attr('flag'));
+    //     $(this).addClass("mui-active");
+    // })
+  });
+</script>
+<script type="text/javascript">
+  function loadRealTimePrice() {
+    $.ajax({
+      url: '/site/ajax-all-product',
+      type: 'post',
+      dataType: "json",
+      data: {},
+      success: function (result) {
+        if (result) {
+          var currentType = "<?= $productInfo->table_name ?>" + ''.toLowerCase();
+          if (nowType == 1) {
+            $('#lastprice').val(result.info[currentType].sp);
+          } else {
+            $('#lastprice').val(result.info[currentType].bp);
+          }
+          reCountFn();
+        }
+      }
+    });
+  }
+
+  setInterval(function () {
+    loadRealTimePrice();
+  }, 1000);
+
+  function reCountFn() {
+    if (tempNums.deposit) {
+      var zs = parseFloat(tempNums.zsprice);
+      var hand = parseInt(tempNums.hand);
+      var deposit = parseFloat(tempNums.deposit);
+      var result = deposit * hand + Math.abs(zs);
+      var hl_after = result * parseFloat($('#currency').val());
+      var str = hl_after.toFixed(2) + '(' + cur + result.toFixed(2) + ')';
+//            var str2 = result.toFixed(2) + "(人民币：" + hl_after.toFixed(2) + ")";
+      var str2 = result.toFixed(2);
+      str2 = (tempNums.curWay != 1) ? (result.toFixed(2) * $('#currency').val()).toFixed(2) : str2;
+      $('#baozhengjin').html(str);
+      $('#alertBZJ').html(str2);
+      $('#zsZF').html(deposit + '(人民币：' + ($('#currency').val() * deposit).toFixed(2) + ')');
+      $('#maxZS').html(Math.abs(zs) + deposit + '(人民币：' + ($('#currency').val() * (Math.abs(zs) + deposit)).toFixed(2) + ')');
+      var total = parseFloat($('#charge').val()) + hl_after;
+      $('#alertTotal').html(total.toFixed(2));
+      $('#totalprice').html(total.toFixed(2));
+    }
+  }
+</script>

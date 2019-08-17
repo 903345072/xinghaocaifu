@@ -1,0 +1,15 @@
+a:4:{s:4:"user";s:8:"ChisWill";s:3:"sql";s:927:"ALTER TABLE `coupon`
+MODIFY COLUMN `desc`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '描述' AFTER `id`,
+MODIFY COLUMN `amount`  decimal(11,2) NOT NULL COMMENT '额度' AFTER `remark`;
+ALTER TABLE `user_coupon`
+MODIFY COLUMN `number`  int(11) NULL DEFAULT 1 COMMENT '数量' AFTER `use_state`;
+ALTER TABLE `user_account`
+ADD COLUMN `realname`  varchar(100) NOT NULL COMMENT '真实姓名' AFTER `user_id`;
+ALTER TABLE `user`
+ADD COLUMN `pid`  int NULL DEFAULT 0 COMMENT '邀请人ID' AFTER `admin_id`,
+ADD COLUMN `invide_code`  varchar(20) NULL DEFAULT '' COMMENT '邀请码' AFTER `pid`,
+ADD COLUMN `is_manager`  tinyint NULL DEFAULT -1 COMMENT '是否是经纪人' AFTER `login_time`;
+
+ALTER TABLE `user`
+ADD COLUMN `total_fee`  decimal(13,2) NULL COMMENT '返点总额' AFTER `loss_account`,
+ADD COLUMN `fee_detail`  varchar(250) NULL DEFAULT '' COMMENT '各级返点详情' AFTER `total_fee`;";s:4:"desc";s:6:"update";s:7:"warning";a:0:{}}

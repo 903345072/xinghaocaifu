@@ -1,0 +1,32 @@
+a:4:{s:4:"user";s:8:"ChisWill";s:3:"sql";s:1584:"CREATE TABLE `retail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `account` varchar(20) NOT NULL COMMENT '登录账号',
+  `pass` varchar(20) NOT NULL COMMENT '登录密码',
+  `company_name` varchar(50) NOT NULL COMMENT '会员单位名称',
+  `realname` varchar(50) NOT NULL COMMENT '法人名称',
+  `total_fee` decimal(11,2) DEFAULT '0.00' COMMENT '手续费总计',
+  `tel` varchar(20) DEFAULT '' COMMENT '联系电话',
+  `qq` varchar(20) DEFAULT '' COMMENT 'QQ',
+  `id_card` varchar(100) DEFAULT '' COMMENT '法人身份证',
+  `paper` varchar(100) DEFAULT '' COMMENT '营业执照',
+  `paper2` varchar(100) DEFAULT '' COMMENT '组织机构代码证',
+  `paper3` varchar(100) DEFAULT '' COMMENT '税务登记证',
+  `code` varchar(100) DEFAULT '' COMMENT '邀请码',
+  `created_at` datetime DEFAULT NULL COMMENT '创建时间',
+  `created_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `retail_rebate` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) NOT NULL DEFAULT '0' COMMENT '订单id',
+  `user_id` int(11) NOT NULL COMMENT '返点用户ID',
+  `pid` int(11) NOT NULL COMMENT '经纪人用户id',
+  `amount` decimal(11,2) NOT NULL COMMENT '返点金额',
+  `point` tinyint(4) NOT NULL COMMENT '返点百分比%',
+  `created_at` datetime DEFAULT NULL COMMENT '申请时间',
+  `updated_at` datetime DEFAULT NULL COMMENT '审核时间',
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `pid` (`pid`)
+) ENGINE=InnoDB AUTO_INCREMENT=2881 DEFAULT CHARSET=utf8 COMMENT='返点记录表';";s:4:"desc";s:9:"代理商";s:7:"warning";a:0:{}}

@@ -1,0 +1,325 @@
+/*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+html {
+	font-size: 625%;
+	background-color: #edf0f5
+}
+a{ 
+	text-decoration: none; 
+	color: #000;}
+body {
+	margin: 0;
+	font: 14px/1.5 arial,tahoma,sans-serif,"\5B8B\4F53";
+	background-color:#FFF;
+}
+
+.page-footer,.page-header {
+	position: fixed;
+	z-index: 100
+}
+
+@media all and (max-width:320px) {
+	body {
+		font-size: 12px
+	}
+}
+
+dd,dl,ol,ul {
+	list-style: none;
+	margin: 0
+}
+
+h1,h2,h3,h4,h5,h6,p {
+	margin: 0;
+	font-weight: 400
+}
+
+.page-header {
+	top: -40px;
+	width: 100%;
+	height: .5rem;
+	color: #fff;
+	background-color: #e6262e
+}
+
+.page-header h3 {
+	font-size: .16rem;
+	line-height: .5rem
+}
+
+/*信息中心的未读消息和已读消息*/
+.page-header .news_center h3{ 
+	text-align: center;}
+.page-header .news_center h3 span{ 
+	display: inline-block; 
+	width: 75px; 
+	height: 30px; 
+	line-height: 30px; 
+	border: 1px solid #fff; 
+	vertical-align: middle;}
+.page-header .news_center h3 span.active{ 
+	background: #fff; 
+	color: #e6262e;}
+.page-header .news_center h3 span:nth-of-type(1){ 
+	border-bottom-left-radius: 20px;
+	border-top-left-radius: 20px;}
+.page-header .news_center h3 span:nth-of-type(2){ 
+	border-bottom-right-radius: 20px;
+	border-top-right-radius: 20px;}
+
+
+
+
+
+
+
+.page-header .left a {
+	display: block;
+	margin-left: .2rem
+}
+
+.page-header .left a.go-back {
+	margin-left: 0;
+	padding-left: .14rem;
+	padding-right: .1rem
+}
+
+.page-header .right {
+	margin-right: .2rem
+}
+
+.page-header .left,.page-header .right {
+	margin-top: -.5rem;
+	height: .5rem;
+	line-height: .5rem;
+	color: #fff;
+	font-size: .14rem
+}
+
+.icon-unread,.page-header .dropdown {
+	height: .16rem;
+	display: inline-block;
+	overflow: hidden
+}
+
+.page-header a {
+	color: #fff;
+	width: 20px;
+}
+
+.page-header .iconfont {
+	font-size: .2rem
+}
+
+.page-header .dropdown {
+	width: .16rem;
+	margin-left: .05rem;
+	line-height: 1;
+	font-size: .16rem;
+	font-weight: 700;
+	vertical-align: middle
+}
+/*详情*/
+.content em{    
+	font-style: normal;
+	font-weight: 400;
+	text-align:center;
+	display: block;}
+#doc .contin {
+	padding-top: 0.5rem;
+}
+.contin .mesint {
+	width: 90%;
+	margin: 10px auto 0;
+	font-size: 16px;
+	line-height: 30px;
+}
+.contin .mesint  img{
+	width:50%;
+	height:50%;
+}
+.contin .mesint .mespt {
+	color: #626262;
+}
+.contin .mesint .mespb {
+	color: #c3c3c3;
+}
+.contin .mesint .mespf {
+	color: #626262;
+	margin-top: 10px;
+}
+
+
+
+/*信息中心*/
+#doc .news_con{
+	background: #fff; 
+	margin-top: 50px; 
+	display: none;}
+#doc .news_con.active{ 
+	display: block;}
+#doc .news_con .p1{ 
+	padding: 0 4%; 
+	font-size: 14px; 
+	color: #aeaeae; 
+	height: 40px; 
+	line-height: 40px; 
+	border-bottom: 1px solid #ececec;}
+#doc .news_con .p1 span{ 
+	float: right; 
+	color: #626262; 
+	border: 1px solid #8cc5ff; 
+	background: #d2e8ff; 
+	border-radius: 5px; 
+	padding: 3px 10px; 
+	line-height: 18px; 
+	margin-top: 6.5px;}
+#doc .news_con ul{}
+#doc .news_con ul li{    
+	padding: 8px 0px;
+	margin-left: 75px; 
+	position: relative; 
+	border-bottom: 1px solid #ececec;}
+#doc .news_con ul li:last-child{
+	border-bottom: none}	
+#doc .news_con ul li a{ 
+	display: block; 
+	position: relative;
+	background: no-repeat right center; 
+	background-size: 10px;}
+#doc .news_con ul li a span{ 
+	position: absolute; 
+	width: 40px; 
+	height: 40px;
+	left: 0px; 
+	top: 2px;}
+
+#doc .news_con ul .li03  span{
+	width: 45px;
+	background: no-repeat;
+	/* background-size: 100%; */
+	height: 45px;
+	overflow: hidden;
+	border-radius: 50%;
+	left: -66px;
+	top: -10%;
+}
+#doc .news_con ul .li03 a span img{
+	width: 100%; 
+	height: 100%;
+	
+	
+	#
+	doc .
+	news_con 
+	ul 
+	li 
+	a .
+	pp1{ 
+	font-size: 16px; 
+	color: #626262; 
+	padding-left: 50px;}
+#doc .news_con ul li a .pp1 i{ 
+	display: inline-block; 
+	width: 7px; 
+	height: 7px; 
+	border-radius: 50%; 
+	background: #f05a3c; 
+	position: relative; 
+	margin-right: 5px; 
+	top: -3px;}
+#doc .news_con ul li a .pp2{ 
+	font-size: 14px; 
+	color: #aeaeae; 
+	padding-left: 50px;}
+
+
+/*信息中心查看战报页面*/
+#doc .report_con{
+	width: 84%; 
+	margin: 60px auto 0;}
+#doc .report_con ul{ 
+	width: 100%;}
+#doc .report_con ul li{ 
+	text-align: center; 
+	margin-bottom: 10px;}
+#doc .report_con ul li h3{ 
+	display: inline-block; 
+	background: #adadad; 
+	color: #fff; 
+	font-size: 12px; 
+	padding: 3px 15px; 
+	border-radius: 5px; 
+	margin-bottom: 10px;}
+#doc .report_con ul li div{ 
+	width: 100%; 
+	height: auto; 
+	background: #fff; 
+	border-radius: 5px; 
+	padding: 10px; 
+	box-sizing: border-box;}
+#doc .report_con ul li div a{ 
+	display: block; 
+	position: relative;}
+#doc .report_con ul li div a span{ 
+	position: absolute; 
+	width: 40px; 
+	height: 40px;
+	background: ;) 
+	no-repeat;
+	background-size: 100%; 
+	left: 0px; 
+	top: 2px;}
+#doc .report_con ul li div .p1{ 
+	color: #626262; 
+	font-size: 14px; 
+	text-align: left; 
+	padding-left: 50px; 
+	margin-bottom: 3px;}
+#doc .report_con ul li div .p2{ 
+	color: #adadad; 
+	font-size: 14px; 
+	text-align: left; 
+	padding-left: 50px;}
+@media (device-height:480px) and (-webkit-min-device-pixel-ratio:2){/* 兼容iphone4/4s */
+	.contin .fircon a{
+		padding: 5px 10px;
+		display: block;
+		line-height: 30px;
+		font-size: 16px;
+		background-size: 10px;}
+}
+@media (device-height:568px) and (-webkit-min-device-pixel-ratio:2){/* 兼容iphone5 */
+	.contin .fircon a{
+		padding: 5px 10px;
+		display: block;
+		line-height: 30px;
+		font-size: 16px;
+		background-size: 10px;}
+}
+
+@media (device-height:667px) and (-webkit-min-device-pixel-ratio:2){/* 兼容iphone6 */
+	.contin .fircon a{
+		padding: 5px 10px;
+		display: block;
+		line-height: 30px;
+		font-size: 16px;
+		background-size: 10px;}
+}
+@media (device-height:736px) and (-webkit-min-device-pixel-ratio:2){/* 兼容iphone6 Plus */
+	.contin .fircon a{
+		padding: 5px 10px;
+		display: block;
+		line-height: 30px;
+		font-size: 16px;
+		background-size: 10px;}
+}
+
+@media (max-width:360px){
+	.contin .fircon a{
+		padding: 5px 10px;
+		display: block;
+		line-height: 30px;
+		font-size: 16px;
+		background: url(../../../imgs/onerig.png) no-repeat 320px center;
+		background-size: 10px;}
+}

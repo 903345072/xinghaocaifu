@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>美黄金规则说明</title>
+    <link rel="stylesheet" href="/css/amazeui.min.css">
+    <link rel="stylesheet" href="/css/commonstyle.css">
+    <style>
+        body {
+            background-color: #f5f5f5
+        }
+    </style>
+</head>
+<body>
+
+<div class="am-padding-horizontal-sm bg-red fixTop" id="topZone">
+    <div class="am-g am-padding-vertical-sm">
+        <div class="am-u-sm-2 am-u-md-2 am-u-lg-2 am-padding-left-xs">
+            <p class="am-icon am-icon-angle-left am-icon-sm col-white" id="backBtn"></p>
+        </div>
+        <div class="am-u-sm-8 am-u-md-8 am-u-lg-8">
+            <p class="am-text-center col-white">美黄金规则说明</p>
+        </div>
+        <div class="am-u-sm-2 am-u-md-2 am-u-lg-2 am-padding-top-xs">
+
+        </div>
+    </div>
+</div>
+
+<div class="am-padding-horizontal-xs am-padding-bottom-sm am-text-sm" id="scrollZone">
+
+    <div style="padding:10px;line-height: 25px;font-size: 14px;background: none">
+        <p style="white-space: normal;"><strong>纽交所美黄金期货，每手100盎司，最小波动10美元(相当于最小波动盈亏人民币72元)，可买涨买跌。</strong></p>
+        <p style="white-space: normal;">【交易品种】：美黄金</p>
+        <p style="white-space: normal;">【货币单位】：美元</p>
+        <p style="white-space: normal;">【交易单位】：100盎司/手&nbsp;</p>
+        <p style="white-space: normal;">【最小波动】：0.1美元/盎司&nbsp;</p>
+        <p style="white-space: normal;">【波动盈亏】：波动一次 = 10美元&nbsp;</p>
+        <p style="white-space: normal;">【买入时间】：上午06:05:00 - 次日04:50:00</p>
+        <p style="white-space: normal;">【卖出时间】：上午06:00:00 - 次日04:58:00</p>
+        <p style="white-space: normal;">【清仓时间】：次日04:58:00</p>
+        <p style="white-space: normal;">【交易综合费】：158元/手</p>
+        <p style="white-space: normal;">【止损金额】：最低止损金额：1080元+止损增幅金额：360元=止损金额：1440元/手</p>
+        <p style="white-space: normal;">【交易保证金】：最大止损金额1440元+交易综合费158元=1598元/手</p>
+        <p style="white-space: normal;">【汇率】1美元＝7.2人民币(汇率波动较大时，将会进行调整）</p>
+        <p style="white-space: normal;"><strong style="color: rgb(255, 0, 0); white-space: normal;"><span
+                style="list-style: none; margin: 0px; padding: 0px; border: 1px solid rgb(0, 0, 0); border-image: none;">产品介绍</span></strong>
+        </p>
+        <p style="text-indent: 2em; white-space: normal;"><span
+                style="list-style: none; margin: 0px; padding: 0px; color: rgb(127, 127, 127);">CME-黄金期货(GC)是纽约商品交易所（芝加哥商业交易所集团）其中的一个交易品种，简称纽约金，属于美式黄金交易（American gold trading)。目前纽约商品交易所(COMEX)和芝加哥商品交易所(IMM)是世界最大的黄金期货交易中心。两大交易所对黄金现货市场的金价影响很大。以纽约商品交易所(COMEX)为例，该交易所本身不参加期货的买卖，仅提供一个场所和设施，并制定一些法规，保证交易双方在公平、合理的前提下进行交易。该所对进行现货和期货交易的黄金的重量、成色、形状、价格波动的上下限、交易日期、交易时间等有极为详尽和复杂的描述。COMEX黄金则是纽交所其中的一个代表交易品种。</span>
+        </p>
+        <p style="list-style: none; padding: 0px; white-space: normal;" microsoft=""><span
+                style="border: 1px solid rgb(0, 0, 0); border-image: none; color: rgb(255, 0, 0);"><strong><span
+                style="list-style: none; margin: 0px; padding: 0px; border: 1px solid rgb(0, 0, 0); border-image: none;">新手练习</span></strong></span>
+        </p>
+        <p style="list-style: none; padding: 0px; text-indent: 2em; white-space: normal;"><span
+                style="list-style: none; margin: 0px; padding: 0px; color: rgb(102, 102, 102);">如果您是新手，没有交易经验，建议您到</span><span
+                style="list-style: none; margin: 0px; padding: 0px; color: rgb(255, 0, 0);">模拟操盘</span><span
+                style="list-style: none; margin: 0px; padding: 0px; color: rgb(102, 102, 102);">练习区进行模拟交易。</span></p>
+        <p style="list-style: none; padding: 0px; white-space: normal;" microsoft=""><strong><span
+                style="border: 1px solid rgb(0, 0, 0); border-image: none; color: rgb(255, 0, 0);"><span
+                style="list-style: none; margin: 0px; padding: 0px; border: 1px solid rgb(0, 0, 0); border-image: none;">美元如何兑换成人民币 ？</span></span></strong><br>
+        </p>
+        <p style="list-style: none; padding: 0px; text-indent: 2em; white-space: normal;"><span
+                style="list-style: none; margin: 0px; padding: 0px; color: rgb(102, 102, 102);">用户交易涉及到美元兑换人民币将使用固定汇率 7 进行兑换即1美元=7.2人民币。(实际兑换汇率波动到一定点位会进行调整将另行公布)</span><span
+                style="color: rgb(102, 102, 102);">用户持仓结算后的盈亏将自动根据上述汇率换成人民币</span></p>
+        <p style="list-style: none; padding: 0px; white-space: normal;" microsoft=""><span
+                style="border: 1px solid rgb(0, 0, 0); border-image: none; color: rgb(255, 0, 0);"><strong
+                style="list-style: none; margin: 0px; padding: 0px;"><span
+                style="list-style: none; margin: 0px; padding: 0px; border: 1px solid rgb(0, 0, 0); border-image: none;">什么是买涨 ？</span></strong></span>
+        </p>
+        <p style="list-style: none; padding: 0px; text-indent: 2em; white-space: normal;"><span
+                style="list-style: none; margin: 0px; padding: 0px; color: rgb(102, 102, 102);">当您买涨时，价格涨了你就赚钱，跌了亏钱。</span>
+        </p>
+        <p style="list-style: none; padding: 0px; text-indent: 2em; white-space: normal;"><span
+                style="list-style: none; margin: 0px; padding: 0px; color: rgb(102, 102, 102);">盈利示例：50美元买涨1手，51美元卖出，涨了1美元，最终盈利：1美元*100盎司*7.2(美元兑人民币汇率)=赚720元 RMB。</span>
+        </p>
+        <p style="list-style: none; padding: 0px; text-indent: 2em; white-space: normal;"><span
+                style="list-style: none; margin: 0px; padding: 0px; color: rgb(102, 102, 102);">亏损示例：50美元买涨1手，49美元卖出，跌了1美元，最终亏损：1美元*100盎司*7.2(美元兑人民币汇率)=亏720元 RMB。</span>
+        </p>
+        <p style="list-style: none; padding: 0px; white-space: normal;" microsoft=""><span
+                style="border: 1px solid rgb(0, 0, 0); border-image: none;"><span style="color: rgb(255, 0, 0);"><strong
+                style="list-style: none; margin: 0px; padding: 0px;"><span
+                style="list-style: none; margin: 0px; padding: 0px; border: 1px solid rgb(0, 0, 0); border-image: none;">什么是买跌 ？</span></strong></span></span>
+        </p>
+        <p style="list-style: none; padding: 0px; text-indent: 2em; white-space: normal;"><span
+                style="list-style: none; margin: 0px; padding: 0px; color: rgb(102, 102, 102);">当您买跌时，价格跌了你就赚钱，涨了亏钱。</span>
+        </p>
+        <p style="list-style: none; padding: 0px; text-indent: 2em; white-space: normal;"><span
+                style="list-style: none; margin: 0px; padding: 0px; color: rgb(102, 102, 102);"></span></p>
+        <p style="list-style: none; padding: 0px; text-indent: 2em; white-space: normal;"><span
+                style="list-style: none; margin: 0px; padding: 0px; color: rgb(102, 102, 102);">盈利示例：<span
+                style="color: rgb(102, 102, 102); text-indent: 28px;">50美元买<span
+                style="color: rgb(102, 102, 102); text-indent: 28px;">跌</span>1手，49美元卖出，跌了1美元，最终<span
+                style="color: rgb(102, 102, 102); text-indent: 28px;">盈利</span>：1美元*100盎司*7.2(美元兑人民币汇率)=<span
+                style="color: rgb(102, 102, 102); text-indent: 28px;">赚720元</span> RMB。</span></span></p>
+        <p style="list-style: none; padding: 0px; text-indent: 2em; white-space: normal;"><span
+                style="list-style: none; margin: 0px; padding: 0px; color: rgb(102, 102, 102);">亏损示例：<span
+                style="color: rgb(102, 102, 102); text-indent: 28px;">50美元买跌1手，51美元卖出，涨了1美元，最终<span
+                style="color: rgb(102, 102, 102); text-indent: 28px;">亏损</span>：1美元*100盎司*7.2(美元兑人民币汇率)=<span
+                style="color: rgb(102, 102, 102); text-indent: 28px;">亏720元 RMB</span>。</span></span></p>
+        <p style="list-style: none; padding: 0px; white-space: normal;" microsoft=""><span
+                style="border: 1px solid rgb(0, 0, 0); border-image: none; color: rgb(255, 0, 0);"><strong><span
+                style="list-style: none; margin: 0px; padding: 0px; border: 1px solid rgb(0, 0, 0); border-image: none;">什么是止盈 ?</span></strong></span>
+        </p>
+        <p style="list-style: none; padding: 0px; text-indent: 2em; white-space: normal;"><span
+                style="list-style: none; margin: 0px; padding: 0px; color: rgb(102, 102, 102);">当单笔交易盈利金额触发(多于等于)指定的止盈金额时，该笔交易会被强制平仓。</span>
+        </p>
+        <p style="list-style: none; padding: 0px; text-indent: 2em; white-space: normal;"><span
+                style="list-style: none; margin: 0px; padding: 0px; color: rgb(102, 102, 102);">由于市场的价格实时都在变动，不保证平仓后最终盈利金额一定大于等于止盈金额，有可能会小于触发的止盈金额。</span>
+        </p>
+        <p style="list-style: none; padding: 0px; white-space: normal;" microsoft=""><span
+                style="border: 1px solid rgb(0, 0, 0); border-image: none; color: rgb(255, 0, 0);"><strong
+                style="list-style: none; margin: 0px; padding: 0px;"><span
+                style="list-style: none; margin: 0px; padding: 0px; border: 1px solid rgb(0, 0, 0); border-image: none;">什么是止损 ?</span></strong></span>
+        </p>
+        <p style="list-style: none; padding: 0px; text-indent: 2em; white-space: normal;"><span
+                style="list-style: none; margin: 0px; padding: 0px; color: rgb(102, 102, 102);">当单笔交易亏损金额触发(多于等于)指定的止损金额时，该笔交易会被强制平仓。</span>
+        </p>
+        <p style="list-style: none; padding: 0px; text-indent: 2em; white-space: normal;"><span
+                style="list-style: none; margin: 0px; padding: 0px; color: rgb(102, 102, 102);">因市场波动，交易数据传输，网络延迟以及移动端交易设备网络信号等不确定因素，可能导致最终卖出成交金额大于止损金额，以交易所实际成交金额为准。</span>
+        </p>
+        <p style="list-style: none; padding: 0px; white-space: normal;" microsoft=""><span
+                style="border: 1px solid rgb(0, 0, 0); border-image: none; color: rgb(255, 0, 0);"><strong
+                style="list-style: none; margin: 0px; padding: 0px;"><span
+                style="list-style: none; margin: 0px; padding: 0px; border: 1px solid rgb(0, 0, 0); border-image: none;">什么是持仓时间 ?</span></strong></span>
+        </p>
+        <p style="list-style: none; padding: 0px; text-indent: 2em; white-space: normal;"><span
+                style="list-style: none; margin: 0px; padding: 0px; color: rgb(102, 102, 102);"><strong
+                style="white-space: normal;">美黄金</strong>期货最后持仓时间：凌晨 04:58:00</span></p>
+        <p style="list-style: none; padding: 0px; text-indent: 2em; white-space: normal;"><span
+                style="list-style: none; margin: 0px; padding: 0px; color: rgb(102, 102, 102);">当持仓时间到点后，持仓中的交易会被强制平仓，不保证成交价格，请务必在到期前自己选择卖出。</span>
+        </p>
+        <p style="white-space: normal;"><span
+                style="border: 1px solid rgb(0, 0, 0); border-image: none; color: rgb(255, 0, 0);"><strong><span
+                style="border: 1px solid rgb(0, 0, 0); border-image: none;">大涨大跌交易限制 ？</span></strong></span></p>
+        <p style="text-indent: 2em;/* white-space: normal; */">交易品种涨跌幅≥20%时禁止买涨或者买跌。</p>
+        <p style="text-indent: 2em; white-space: normal;">交易品种涨跌幅≥30%时持仓中买涨或者买跌的交易全部强制平仓。</p>
+        <p style="list-style: none; padding: 0px; white-space: normal;" microsoft=""><span
+                style="border: 1px solid rgb(0, 0, 0); border-image: none; color: rgb(255, 0, 0);"><strong
+                style="list-style: none; margin: 0px; padding: 0px;"><span
+                style="list-style: none; margin: 0px; padding: 0px; border: 1px solid rgb(0, 0, 0); border-image: none;">交易综合费 ？</span></strong></span>
+        </p>
+        <p style="list-style: none; padding: 0px; white-space: normal;" microsoft=""><span
+                style="list-style: none; margin: 0px; padding: 0px; color: rgb(102, 102, 102);"></span></p>
+        <p style="text-indent: 2em; white-space: normal;"><strong style="white-space: normal;">美黄金</strong>期货每手交易综合费：158元
+        </p>
+        <p style="text-indent: 2em; white-space: normal;">（买进卖出只收取一次）</p>
+        <p style="list-style: none; padding: 0px; white-space: normal;" microsoft=""><span
+                style="border: 1px solid rgb(0, 0, 0); border-image: none; color: rgb(255, 0, 0);"><strong
+                style="list-style: none; margin: 0px; padding: 0px;"><span
+                style="list-style: none; margin: 0px; padding: 0px; border: 1px solid rgb(0, 0, 0); border-image: none;">履约保证金 ？</span></strong></span>
+        </p>
+        <p style="list-style: none; padding: 0px; text-indent: 2em; white-space: normal;"><span
+                style="list-style: none; margin: 0px; padding: 0px; color: rgb(102, 102, 102);"></span></p>
+        <p style="white-space: normal;">
+            履约保证金为操盘手委托平台冻结用于履行交易亏损赔付义务的保证金。操盘手以冻结的履约保证金作为承担交易亏损赔付的上限(注：若出现订单穿仓由客户自己承担；出现账户穿仓由投资人承担)。合作交易结束后，根据结算结果，如交易盈利，操盘手冻结的履约保证金全额退还。如交易亏损，从冻结的履约保证金中，扣减操盘手所应承担的亏损赔付额，扣减后余额退还。</p>
+        <p microsoft="" style="white-space: normal; list-style: none; padding: 0px;"><span
+                style="border: 1px solid rgb(0, 0, 0); color: rgb(255, 0, 0);"><strong
+                style="list-style: none; margin: 0px; padding: 0px;"><span
+                style="list-style: none; margin: 0px; padding: 0px; border: 1px solid rgb(0, 0, 0);">盈利如何分配 ?</span></strong></span>
+        </p>
+        <p style="white-space: normal;">操盘手与投资人合作交易，止盈金额以内的盈利全归您。</p>
+        <p style="white-space: normal;">超出止盈部分的盈利全部归合作的投资人所有，同时超出点买人总资金部分的亏损（即穿仓）也全部由投资人承担。</p>
+        <p style="list-style: none; padding: 0px; white-space: normal;" microsoft=""><span
+                style="list-style: none; margin: 0px; padding: 0px; color: rgb(102, 102, 102);"></span></p>
+        <p style="list-style: none; padding: 0px; white-space: normal;" microsoft=""><span
+                style="border: 1px solid rgb(0, 0, 0); border-image: none; color: rgb(255, 0, 0);"><strong
+                style="list-style: none; margin: 0px; padding: 0px;"><span
+                style="list-style: none; margin: 0px; padding: 0px; border: 1px solid rgb(0, 0, 0); border-image: none;">实盘交易下单</span></strong></span>
+        </p>
+        <p style="list-style: none; padding: 0px; text-indent: 2em; white-space: normal;"><span
+                style="list-style: none; margin: 0px; padding: 0px; color: rgb(102, 102, 102);">操盘人的所有美黄金期货交易，全部经由投资人的期货交易账户，下单到纽约商品交易所NYMEX。</span>
+        </p>
+        <p><span style="list-style: none; margin: 0px; padding: 0px; color: rgb(102, 102, 102);"><br></span></p>
+        <p><br></p></div>
+
+
+</div>
+
+
+<script type="text/javascript" src="/js/jquery-1.9.1.min.js"></script>
+<script>
+    !function () {
+
+        var topZone = $('#topZone');
+        var scrollZone = $('#scrollZone');
+        var h = topZone.height();
+
+        scrollZone.css({'padding-top': h})
+
+        $('#backBtn').on('click', function () {
+            window.history.go(-1)
+        })
+    }()
+</script>
+</body>
+</html>

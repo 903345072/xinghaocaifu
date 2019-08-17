@@ -1,0 +1,8 @@
+a:4:{s:4:"user";s:6:"王琦";s:3:"sql";s:439:"ALTER TABLE `order`
+ADD COLUMN `fee`  decimal(11,1) NULL DEFAULT 0 COMMENT '手续费' AFTER `one_profit`;
+ALTER TABLE `order`
+MODIFY COLUMN `discount`  decimal(11,2) NULL DEFAULT 0 COMMENT '优惠金额' AFTER `sell_deposit`;
+ALTER TABLE `coupon`
+ADD COLUMN `coupon_type`  int(11) NULL COMMENT '优惠劵类型' AFTER `amount`;
+ALTER TABLE `user_coupon`
+ADD COLUMN `number`  int NULL DEFAULT 1 COMMENT '优惠劵数量' AFTER `use_state`;";s:4:"desc";s:17:"order表字段fee";s:7:"warning";a:0:{}}

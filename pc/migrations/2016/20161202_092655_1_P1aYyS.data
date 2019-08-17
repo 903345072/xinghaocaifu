@@ -1,0 +1,4 @@
+a:4:{s:4:"user";s:2:"wq";s:3:"sql";s:225:"ALTER TABLE `user`
+ADD COLUMN `point`  tinyint(3) NULL DEFAULT 0 COMMENT '经纪人返点百分比%' AFTER `total_fee`;
+ALTER TABLE `user`
+ADD COLUMN `tem_id`  int(11) NULL DEFAULT 0 COMMENT '临时管理员id' AFTER `point`;";s:4:"desc";s:4:"user";s:7:"warning";a:0:{}}

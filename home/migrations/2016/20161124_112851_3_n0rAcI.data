@@ -1,0 +1,2 @@
+a:4:{s:4:"user";s:2:"wq";s:3:"sql";s:111:"ALTER TABLE `retail`
+ADD COLUMN `point`  tinyint(3) NULL DEFAULT 0 COMMENT '返点百分比%' AFTER `realname`;";s:4:"desc";s:6:"retail";s:7:"warning";a:0:{}}

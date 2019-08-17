@@ -1,0 +1,2 @@
+a:4:{s:4:"user";s:6:"王琦";s:3:"sql";s:54:"ALTER TABLE `user_coupon`
+DROP INDEX `user_coupon_id`;";s:4:"desc";s:12:"删除索引";s:7:"warning";a:1:{i:0;s:4:"DROP";}}

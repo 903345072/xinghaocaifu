@@ -1,0 +1,2 @@
+a:4:{s:4:"user";s:6:"王琦";s:3:"sql";s:114:"ALTER TABLE `product_price`
+ADD COLUMN `fee`  decimal(11,1) NULL DEFAULT 0 COMMENT '手续费' AFTER `one_profit`;";s:4:"desc";s:15:"增加手续费";s:7:"warning";a:0:{}}

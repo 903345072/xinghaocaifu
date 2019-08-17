@@ -1,0 +1,147 @@
+﻿{
+    "button": [
+                {
+                    "type": "view",
+                    "name": "在线交易",
+                    "url": 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx32b6b9697c02ee68&redirect_uri=http%3a%2f%2fwww.kngxz.com/&response_type=code&scope=snsapi_userinfo&state=index#wechat_redirect',
+                },
+                {
+                    "type": "view",
+                    "name": "经纪人",
+                    "url": 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx32b6b9697c02ee68&redirect_uri=http%3a%2f%2fwww.kngxz.com/manager/register&response_type=code&scope=snsapi_userinfo&state=index#wechat_redirect',
+                },
+                {
+                    "type": "view",
+                    "name": "测试数据",
+                    "url": "https://www.kngxz.com/site/test"
+                },
+    ]
+}
+wx32b6b9697c02ee68 ca70fc899fed6cf9cba67eb16410116a
+{
+    "button": [
+        {
+            "type": "view",
+            "name": "华中交易",
+            "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx32b6b9697c02ee68&redirect_uri=http%3a%2f%2fwww.kngxz.com/&response_type=code&scope=snsapi_userinfo&state=index#wechat_redirect"
+        },
+        {
+            "name": "华中教育",
+            "sub_button": [
+                {
+                    "type": "view",
+                    "name": "经纪人",
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx32b6b9697c02ee68&redirect_uri=http%3a%2f%2fwww.kngxz.com/manager/register&response_type=code&scope=snsapi_userinfo&state=index#wechat_redirect"
+                },
+                {
+                    "type": "view",
+                    "name": "交易规则",
+                    "url": "http://www.kngxz.com/site/rule"
+                }
+            ]
+        },
+        {   
+            "type":"click",
+            "name":"华中服务",
+            "key":"XX_Nanqe_001" 
+        }
+    ]
+}
+
+wx363394d19d48caeb e4bd03871f1e94889978e166b9dc1a25
+{
+    "button": [
+        {
+            "type": "view",
+            "name": "一键登录",
+            "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx363394d19d48caeb&redirect_uri=http%3a%2f%2fwww.wdnlj.com/&response_type=code&scope=snsapi_userinfo&state=index#wechat_redirect"
+        },
+        {
+            "name": "豫商务教育",
+            "sub_button": [
+                {
+                    "type": "view",
+                    "name": "经纪人",
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx363394d19d48caeb&redirect_uri=http%3a%2f%2fwww.wdnlj.com/manager/register&response_type=code&scope=snsapi_userinfo&state=index#wechat_redirect"
+                },
+                {
+                    "type": "view",
+                    "name": "常见问题",
+                    "url": "http://www.wdnlj.com"
+                },
+                {
+                    "type": "view",
+                    "name": "交易规则",
+                    "url": "http://www.wdnlj.com"
+                }
+            ]
+        },
+        {   
+            "type":"click",
+            "name":"豫商务服务",
+            "key":"XX_Nanqe_001" 
+        }
+    ]
+}
+
+{
+    "button": [
+        {
+            "type": "view",
+            "name": "澜实交易",
+            "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxce2566c9d76d322d&redirect_uri=http%3a%2f%2fwww.liqipai.cn/&response_type=code&scope=snsapi_userinfo&state=index#wechat_redirect"
+        },
+        {
+            "name": "澜实教育",
+            "sub_button": [
+                {
+                    "type": "view",
+                    "name": "经纪人",
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxce2566c9d76d322d&redirect_uri=http%3a%2f%2fwww.liqipai.cn/manager/register&response_type=code&scope=snsapi_userinfo&state=index#wechat_redirect"
+                }
+            ]
+        },
+        {   
+            "type":"click",
+            "name":"澜实服务",
+            "key":"XX_Nanqe_001" 
+        }
+    ]
+}
+下方为金泰
+{
+    "button": [
+        {
+            "type": "view",
+            "name": "在线登录",
+            "url": "http://ivytech.com.cn/"
+        },
+        {
+            "type": "view",
+            "name": "平台介绍",
+            "url": "http://ivytech.com.cn/site/rule"
+
+        },
+        {   
+            "type": "view",
+            "name": "最新公告",
+            "url": "http://ivytech.com.cn/" 
+        }
+    ]
+}
+以下为富盈
+{
+    "button": [
+        {
+            "type": "view",
+            "name": "在线登录",
+            "url": "http://www.knchb.com/"
+        },
+        {
+            "type": "view",
+            "name": "平台介绍",
+            "url": "http://www.knchb.com/site/rule"
+
+        }
+    ]
+}

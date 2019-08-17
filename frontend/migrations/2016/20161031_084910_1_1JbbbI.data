@@ -1,0 +1,2 @@
+a:4:{s:4:"user";s:8:"ChisWill";s:3:"sql";s:167:"ALTER TABLE `user`
+ADD COLUMN `apply_state`  tinyint NULL DEFAULT 1 COMMENT '申请状态：1未申请，2待审核，3审核通过，-1审核不通过' AFTER `state`;";s:4:"desc";s:6:"update";s:7:"warning";a:0:{}}

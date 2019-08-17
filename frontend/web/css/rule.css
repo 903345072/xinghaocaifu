@@ -1,0 +1,32 @@
+@charset "utf-8";
+body{background: #f2f2f2;}
+.ruleCon{margin-bottom: 10px;}
+.ruleCon table{
+    text-align: center;
+    border:1px solid #000;
+    width: 100%;    
+    line-height: 26px;
+}
+.ruleCon table .textleft{
+    text-align: left;
+}
+.ruleCon table .textleft td:last-child{
+    padding-left: 8px;
+}
+.ruleCon p{text-align: center;font-size: 16px;}
+.ruleCon table tr{
+    border-bottom:1px solid #000;
+}
+.ruleCon table tr td{
+    width: 20%;    
+    font-size: 12px;
+    border-right:1px solid #000;
+    border-bottom:1px solid #000;
+}
+.ruleCon table tr td:last-child{
+    border-right:none;
+}
+.ruleCon table tr td:first-child{
+    text-align: left;
+    padding-left: 5px;
+}

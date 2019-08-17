@@ -1,0 +1,10 @@
+a:4:{s:4:"user";s:8:"ChisWill";s:3:"sql";s:616:"ALTER TABLE `article`
+ADD COLUMN `state`  tinyint NULL DEFAULT 1 COMMENT '状态' AFTER `category`;
+ALTER TABLE `order`
+MODIFY COLUMN `sell_price`  decimal(11,2) NULL DEFAULT 0.00 COMMENT '卖出价格' AFTER `rise_fall`;
+ALTER TABLE `user`
+MODIFY COLUMN `account`  decimal(13,2) NULL DEFAULT 0.00 COMMENT '账户余额' AFTER `admin_id`;
+ALTER TABLE `user_withdraw`
+MODIFY COLUMN `amount`  decimal(11,2) NOT NULL COMMENT '出金金额' AFTER `user_id`;
+ALTER TABLE `user_charge`
+MODIFY COLUMN `charge_state`  tinyint(4) NULL DEFAULT NULL COMMENT '充值状态：1待付款，2成功，-1失败' AFTER `charge_type`;";s:4:"desc";s:7:"article";s:7:"warning";a:0:{}}

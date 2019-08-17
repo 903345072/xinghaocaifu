@@ -1,0 +1,10 @@
+a:4:{s:4:"user";s:8:"ChisWill";s:3:"sql";s:618:"ALTER TABLE `coupon`
+MODIFY COLUMN `coupon_type`  int(11) NULL DEFAULT 0 COMMENT '优惠劵类型' AFTER `amount`,
+ADD UNIQUE INDEX (`amount`, `coupon_type`) ;
+ALTER TABLE `order`
+DROP COLUMN `direction`,
+MODIFY COLUMN `rise_fall`  tinyint(4) NULL DEFAULT NULL COMMENT '涨跌：1涨，2跌' AFTER `deposit`;
+ALTER TABLE `order`
+MODIFY COLUMN `rise_fall`  tinyint(4) NULL DEFAULT 1 COMMENT '涨跌：1涨，2跌' AFTER `deposit`,
+MODIFY COLUMN `sell_deposit`  decimal(11,2) NULL DEFAULT 0 COMMENT '卖出总价' AFTER `sell_hand`,
+MODIFY COLUMN `profit`  decimal(11,2) NULL DEFAULT 0 COMMENT '盈亏' AFTER `currency`;";s:4:"desc";s:6:"update";s:7:"warning";a:1:{i:0;s:4:"DROP";}}

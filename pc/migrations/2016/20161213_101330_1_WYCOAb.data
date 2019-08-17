@@ -1,0 +1,7 @@
+a:4:{s:4:"user";s:2:"wq";s:3:"sql";s:222:"CREATE TABLE `data_xau` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `price` varchar(30) DEFAULT NULL,
+  `time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `time` (`time`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;";s:4:"desc";s:2:"wq";s:7:"warning";a:0:{}}
