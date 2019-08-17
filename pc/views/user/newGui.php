@@ -7,10 +7,10 @@
   <a href="javascript:;">></a>
 </div>
 <div class="clearfix wrap1 mb59">
-  <div class="fl aslide">
+  <div class="fl aslide" style="padding: 22px 12px 20px">
     <ul class="help_list">
 
-      <li id="rulerisk" data-src="<?= url(['rule/rulerisk']) ?>">
+      <li class="on" id="rulerisk" data-src="<?= url(['rule/rulerisk']) ?>">
         <i>FX</i>
         <span>《星浩财富交易风险提示》风险告知书</span>
       </li>
@@ -26,12 +26,12 @@
         <i>WT</i>
         <span>一分钟了解星浩财富</span>
       </li>
-      <li id="rule" data-src="<?= url(['rule/rule1']) ?>">
+      <li style="display: none" id="rule" data-src="<?= url(['rule/rule1']) ?>">
         <i>RX</i>
         <span>交易说明</span>
       </li>
     </ul>
-    <ul class="sm_list">
+    <ul style="display: none" class="sm_list">
       <li id="rule1" data-src="<?= url(['rule/rule1']) ?>">
         <a href="javascript:;">CL美原油期货交易</a>
       </li>
@@ -127,7 +127,7 @@
       </div>
     </div>
   </div>-->
-  <iframe id="ruleContent" src="<?= url(['rule/rule1']) ?>" frameborder="0" class="fr alide_r"></iframe>
+  <iframe id="ruleContent" src="<?= url(['rule/rulerisk']) ?>" frameborder="0" class="fr alide_r"></iframe>
 </div>
 
 <script>

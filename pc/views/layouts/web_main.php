@@ -49,7 +49,7 @@
             <span class="user">欢迎您 <?= u()->nickname ?></span>
             <a href="<?= url(['site/logout']) ?>">退出</a>
           <?php endif ?>
-        <a
+        <a style="display: none"
           href="http://chat.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=1013221&configID=71213&jid=8827179158"
           class="kefu" target="_blank">
           <i></i>

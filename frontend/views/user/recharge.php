@@ -16,7 +16,7 @@
 				<li data-mode="20000">20000元</li>
 			</ul>
 			<div class="bot_btn">
-				<div class="fl" onclick="formSubmit(2)">
+				<div style="display: none" class="fl" onclick="formSubmit(2)">
 					<img src="/wap/img/alipay.jpeg"/>
 					<p>支付宝支付</p>
 				</div>
