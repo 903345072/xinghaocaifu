@@ -1,7 +1,7 @@
 
 	<body style="background: #21212B;">
 		<div class="header">
-			<p>中资国际</p>
+			<p>星浩财富</p>
       <a href="javascript:history.back()"><img src="/wap/img/icons_03.png"/></a>
 		</div>
 		
