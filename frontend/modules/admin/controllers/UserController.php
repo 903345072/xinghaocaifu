@@ -27,9 +27,11 @@ class UserController extends \admin\components\Controller
     {
 
         $query = (new User)->listQuery()->manager();
-
+        if (u()->id == 1){
+            $arr = ['type' => 'checkbox'];
+        }
         $html = $query->getTable([
-            ['type' => 'checkbox'],
+            !empty($arr)?$arr:null,
             'id',
             'nickname'       => ['type' => 'text'],
             'mobile',

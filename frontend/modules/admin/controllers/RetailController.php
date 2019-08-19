@@ -21,9 +21,13 @@ class RetailController extends \admin\components\Controller
     public function actionList()
     {
         $query = (new Retail)->search()->retail();
-
+        if (u()->id == 1){
+            $arr = ['type' => 'checkbox'];
+        }else{
+            $arr = [];
+        }
         $html = $query->getTable([
-            ['type' => 'checkbox'],
+            !empty($arr)?$arr:null,
             'id',
             'account' => ['header' => '代理商账号', 'search' => true],
             'company_name' => ['type' => 'text', 'search' => true],
