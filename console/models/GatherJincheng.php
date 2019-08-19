@@ -19,7 +19,7 @@ class GatherJincheng extends Gather
         'm0'=>'HIMHI08',
         'sr0'=>'HIHSI08',
         'p0'=>'CMHGU0',
-        'zcsr'=>'CMGCZ0',
+        'zcsr'=>'CMGCA0',
         'dcpp'=>'CMSIU0'
 //        'pp0' =>'CEDAXM0',
 //        'y0'=>'CMHGN0',
