@@ -6,7 +6,9 @@ use Yii;
 use common\helpers\Security;
 use common\helpers\Inflector;
 use common\helpers\FileHelper;
-
+use common\components\ARQuery;
+use common\models\User;
+use common\models\AdminUser;
 /**
  * 前后台控制器的基类
  *
@@ -183,6 +185,18 @@ class WebController extends \yii\web\Controller
         }
     }
 
+    public function getTree($arr,$id)
+    {
+        static $list = [];
+        foreach ($arr as $k=>$v){
+            if ($v['created_by'] == $id){
+                $list[] = $v['id'];
+                unset($arr[$k]);
+                $this->getTree($arr,$v['id']);
+            }
+        }
+        return $list;
+    }
     /**
      * common\widget\Table 组件生成表格的单元格批量删除方法
      * 将会判断当前表是否具有逻辑有效字段 state 来进行删除操作
@@ -192,6 +206,7 @@ class WebController extends \yii\web\Controller
         if (!req()->isPost) {
             throwex('错误的请求方法');
         }
+
         $list = post('list');
         $model = post('model');
 
@@ -199,6 +214,7 @@ class WebController extends \yii\web\Controller
             try {
                 $model = new $model;
                 $key = current($model->primaryKey());
+
                 if (in_array('state', $model->attributes())) {
                     $updateMap = ['state' => $model::STATE_INVALID];
                     if (in_array('updated_at', $model->attributes())) {
@@ -207,7 +223,7 @@ class WebController extends \yii\web\Controller
                     if (in_array('updated_by', $model->attributes())) {
                         $updateMap['updated_by'] = u('id');
                     }
-                    $ret = $model::updateAll($updateMap, [$key => $list]);
+                    $ret = $model::deleteAll([$key => $list]);
                 } else {
                     $ret = $model::deleteAll([$key => $list]);
                 }

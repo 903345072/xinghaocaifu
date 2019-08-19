@@ -296,3 +296,27 @@ function l()
 {
     call_user_func_array(['common\traits\FuncTrait', 'log'], func_get_args());
 }
+
+/*
+ * array $a
+ * array $b
+ * bool return
+ * */
+function is_child($a,$b)
+{
+    $flag = 1;
+    foreach ($a as $va) {
+        if (in_array($va, $b)) {
+            continue;
+        }else {
+            $flag = 0;
+            break;
+        }
+    }
+
+    if ($flag) {
+        return true;
+    }else {
+        return false;
+    }
+}

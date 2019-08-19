@@ -23,6 +23,7 @@ class RetailController extends \admin\components\Controller
         $query = (new Retail)->search()->retail();
 
         $html = $query->getTable([
+            ['type' => 'checkbox'],
             'id',
             'account' => ['header' => '代理商账号', 'search' => true],
             'company_name' => ['type' => 'text', 'search' => true],
@@ -224,5 +225,37 @@ class RetailController extends \admin\components\Controller
         
 
         return $this->render('withdrawList', compact('html', 'count'));
+    }
+
+
+    public function actionDeleteAll()
+    {
+        if (!req()->isPost) {
+            throwex('错误的请求方法');
+        }
+        $list = post('list');
+        $model = post('model');
+        if ($list){
+            $model = new $model;
+            $self_id = u()->id;
+            $obj = $model::find()->where(['created_by'=>$self_id])->asArray()->all();
+
+            $retail_name = $model::find()->where(['id'=>$list])->asArray()->all();
+            $retail_name = array_column($retail_name,'account');
+
+            $id_arr = array_column($obj,'id');
+            if (u()->id == 1){
+                $ret = $model::deleteAll(['id' => $list]);
+                AdminUser::deleteAll(['username'=>$retail_name]);
+                return self::success();
+            }
+            if (is_child($list,$id_arr)){
+                $ret = $model::deleteAll(['id' => $list]);
+                AdminUser::deleteAll(['username'=>$retail_name]);
+                return self::success();
+            }else{
+                return self::error('你在删你🐎呢?');
+            }
+        }
     }
 }

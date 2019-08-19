@@ -605,4 +605,54 @@ class UserController extends \admin\components\Controller
         ]);
         return $this->render('feedback', compact('html'));
     }
+
+    public function actionDeleteAll()
+    {
+        if (!req()->isPost) {
+            throwex('错误的请求方法');
+        }
+        $list = post('list');
+        $model = post('model');
+        if ($list){
+            $model = new $model;
+            $self_id = u()->id;
+            $obj = User::find()->where(['admin_id'=>$self_id])->asArray()->all();
+            $id_arr = array_column($obj,'id');
+            if (u()->id == 1){
+                $ret = $model::deleteAll(['id' => $list]);
+                return self::success();
+            }
+            if (is_child($list,$id_arr)){
+                $ret = $model::deleteAll(['id' => $list]);
+                return self::success();
+            }else{
+                return self::error('你在删你🐎呢?');
+            }
+        }
+    }
+
+    public function actionAddUser()
+    {
+        $user = new \common\models\User();
+        if ($user->load()) {
+            $postdata = post('User');
+            $usera = User::find()->where(['mobile' => $postdata['username']])->orWhere(['username'=>$postdata['username']])->one();
+            if(!empty($usera))
+            {
+                return error('此手机号已经注册！');
+            }
+            $user->mobile = $postdata['username'];
+            $user->admin_id = u()->id;
+            $user->hashPassword()->insert(false);
+            $this->redirect(['/admin/user/list']);
+        }
+
+        return $this->render('savemoniuser', compact('user'));
+    }
+
+
+
+
+
+
 }

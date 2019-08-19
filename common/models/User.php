@@ -241,4 +241,6 @@ class User extends \common\components\ARModel
     {
         return $this->resetValue($value);
     }
+
+
 }
