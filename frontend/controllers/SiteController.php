@@ -855,7 +855,7 @@ class SiteController extends \frontend\components\Controller
           array_walk($a,function ($item){
               $name = self::db("select id,Name From data_{$item} order by id asc limit 1")->queryone();//最早一条数据
               $name = $name['Name'];
-              self::dbDelete("data_{$item}","Name != '{$name}' or price = 0 limit 20");
+              self::dbDelete("data_{$item}","Name != '{$name}' or price = 0 limit 100");
           });
       }
 
