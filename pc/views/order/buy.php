@@ -1061,7 +1061,7 @@
   function getDataMin30() {
       flagss = 2;
     $.ajax({
-        url: 'http://dt.jctytech.com/stock.php?u=wwwzzzzdd0599&symbol='+symbol+'&type=kline&line=min,30&num=100&sort=Date%20desc',
+        url: 'http://dt.jctytech.com/stock.php?u=hongyiqihuo&symbol='+symbol+'&type=kline&line=min,30&num=100&sort=Date%20desc',
       async: true,
       success: function (ret) {
         dataO = dealNumMin30(ret);

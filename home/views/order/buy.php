@@ -1071,7 +1071,7 @@ body{
           });
       }else{
           $.ajax({
-              url: 'http://dt.jctytech.com/stock.php?u=wwwzzzzdd0599&symbol='+symbol+'&type=kline&line=min,30&num=100&sort=Date%20desc',
+              url: 'http://dt.jctytech.com/stock.php?u=hongyiqihuo&symbol='+symbol+'&type=kline&line=min,30&num=100&sort=Date%20desc',
 
               //url: "<?=url('site/get-data')?>" + "?symbol="+symbol+'&type=5',
               async: true,dataType:'json',
@@ -1087,7 +1087,7 @@ body{
   function getDataMin30() {
       flag = 2;
     $.ajax({
-        url: 'http://dt.jctytech.com/stock.php?u=wwwzzzzdd0599&symbol='+symbol+'&type=kline&line=min,30&num=100&sort=Date%20desc',
+        url: 'http://dt.jctytech.com/stock.php?u=hongyiqihuo&symbol='+symbol+'&type=kline&line=min,30&num=100&sort=Date%20desc',
 
         //url: "<?=url('site/get-data')?>" + "?symbol="+symbol+'&type=5',
       async: true,dataType:'json',
