@@ -22,7 +22,7 @@ return [
 
     // 交易产品列表
     'productCode'           => [
-        'cl'    => 'NECLU0',
+        'cl'    => 'NECLV0',
         'scbu'=>'SCbu1912',
         'pp0' =>'SCrb1910',
         'y0'=>'WGCNQ0',
