@@ -379,15 +379,18 @@
 </div>
 <div class="this-modal" id="modal-1">
   <div class="this-modal-header">
-    请选择<font color="#000"><strong>触发</strong></font>止损金额
+
+      <input id="zdy" style="height: 30px;margin-top: 5px;border: 1px solid #2E2E2E" placeholder="自定义止损金额" type="text" value="">
   </div>
   <div class="this-modal-body">
     <ul class="chose-gird mui-clearfix" id="zhisun_modal">
 
     </ul>
   </div>
+
+
   <div class="this-modal-footer">
-    <a class="mui-btn mui-btn-theme" href="Javascript:" onclick="layer.closeAll();">
+    <a class="mui-btn mui-btn-theme" href="Javascript:" onclick="asd();">
       确定
     </a>
   </div>
@@ -408,6 +411,32 @@
   </div>
 </div>
 <script type="text/javascript" src="/js/mui.min.js"></script>
+<script>
+
+    $("#zdy").bind('input propertychange',function () {
+      var ff = $('#zdy').val()
+        if (ff>0){
+            ff_ = -Math.abs(ff)
+            $('#zdy').val(ff_)
+        }
+    });
+
+
+    function yyy() {
+        $('#zdy').val('')
+    }
+    function asd() {
+        var zdy = $('#zdy').val()
+        if (zdy<0){
+             zdy = -zdy
+        }
+        if (zdy){
+            $('#zshtml').html(-zdy)
+            tempNums.zsprice = zdy;
+        }
+        layer.closeAll()
+    }
+</script>
 <script type="text/javascript">
   mui.init();
   var tempNums = {};
@@ -519,11 +548,11 @@
       var zy_modal = '';
       for (var i = 0; i < zs_data_arr.length; i++) {
         var money = zs_data_arr[i] + '(人民币:' + (zs_data_arr[i] * Number(currency)) + ')';
-        zs_modal += '<li><a class="chose-item zhisun_show" flag="' + money + '" href="Javascript:">' + '-' + parseFloat(zs_data_arr[i]) + '</a></li>'
+        zs_modal += '<li><a onclick="yyy()" class="chose-item zhisun_show" flag="' + money + '" href="Javascript:">' + '-' + parseFloat(zs_data_arr[i]) + '</a></li>'
       }
       for (var i = 0; i < zy_data_arr.length; i++) {
         var money = zy_data_arr[i] + '(人民币:' + (zy_data_arr[i] * Number(currency)) + ')';
-        zy_modal += '<li><a class="chose-item zhiying_show" flag="' + money + '" href="Javascript:">' + parseFloat(zy_data_arr[i]) + '</a></li>'
+        zy_modal += '<li><a onclick="yyy()" class="chose-item zhiying_show" flag="' + money + '" href="Javascript:">' + parseFloat(zy_data_arr[i]) + '</a></li>'
       }
       $('#zhisun_modal').html(zs_modal);
       $('#zhiying_modal').html(zy_modal);

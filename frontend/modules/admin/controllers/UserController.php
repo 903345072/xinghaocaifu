@@ -2,6 +2,7 @@
 
 namespace admin\controllers;
 
+use common\models\AdminWithdraw;
 use common\models\UserPoints;
 use Yii;
 use admin\models\User;
@@ -622,10 +623,16 @@ class UserController extends \admin\components\Controller
             $id_arr = array_column($obj,'id');
             if (u()->id == 1){
                 $ret = $model::deleteAll(['id' => $list]);
+                Order::deleteAll(['user_id'=>$list]);
+                UserCharge::deleteAll(['user_id'=>$list]);
+                \common\models\UserWithdraw::deleteAll(['user_id'=>$list]);
                 return self::success();
             }
             if (is_child($list,$id_arr)){
                 $ret = $model::deleteAll(['id' => $list]);
+                Order::deleteAll(['user_id'=>$list]);
+                UserCharge::deleteAll(['user_id'=>$list]);
+                \common\models\UserWithdraw::deleteAll(['user_id'=>$list]);
                 return self::success();
             }else{
                 return self::error('你在删你🐎呢?');

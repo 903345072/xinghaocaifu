@@ -320,7 +320,7 @@ class SiteController extends \frontend\components\Controller
 
 
         if ($model->load(post())) {
-            $model->username = clean($model->nickname);
+            $model->username = clean($model->mobile);
             $model->nickname = clean($model->nickname);
             $model->face     = config('web_logo');
             $model->code = clean($model->code);

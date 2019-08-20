@@ -253,9 +253,42 @@
             </select>
           </li>
           <li>
-            <label for="">止损金额：</label>
-            <select name="" id="a2" class="am-block wid100 am-alert-secondary">
-            </select>
+            <label  for="">止损金额：</label>
+
+      <div style="position:relative;margin-left: 22%;height: 30px; margin-top: -25px;" class="col-xs-6">
+
+        <span style="margin-left:115px;width:18px;overflow:hidden;height: 30px;">
+            <select class="am-block wid100 am-alert-secondary" id="a2" style="width:236px;margin-left:-115px;height: 30px;" onchange="setRuleContent();">
+        </span>
+
+         <input id="_input" type="text" style="width:220px;position:absolute;left:0px;height:31px;"   onchange="setRuleContent1();"  placeholder="输入止损金额">
+      </div>
+
+
+
+                          <script>
+                             function asdq(aa){
+
+                                 tempNums.zsprice = $(aa).attr('zshtml')
+                                 $("#_input").val($(aa).attr('zshtml'))
+                             }
+                              $("#_input").bind('input propertychange',function () {
+                                  var dd = $('#_input').val()
+                                  if (dd>0){
+                                      ff_ = -Math.abs(dd)
+                                      $('#_input').val(ff_)
+                                  }
+                                  tempNums.zsprice = -Math.abs(dd)
+
+                              });
+                              function setRuleContent(){
+                                  var selectValue = $('#a2 option:selected').text();//选中select的内容
+                                  //alert("selectValue" + selectValue);
+                                  var inputValue = $("#_input").val(selectValue);//input获得select的内容并显示在输入框中
+
+                              };
+
+                          </script>
           </li>
           <li>
             <label for="">止盈金额：</label>
@@ -590,7 +623,7 @@
         if (i == 0) {
           var zshtml1 = -loss[i];
         }
-        $('#a2').append('<option flag="' + i + '" value="' + money + '" zshtml="' + zshtml + '">￥-' + loss[i] + '</option>');
+        $('#a2').append('<option onclick="asdq(this)" flag="' + i + '" value="' + money + '" zshtml="' + zshtml + '">￥-' + loss[i] + '</option>');
       }
     } else {
       var frozen2 = (Number(currency) * Number(frozen)).toFixed(0);
