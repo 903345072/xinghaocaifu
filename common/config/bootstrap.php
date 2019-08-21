@@ -14,12 +14,12 @@ const WEB_DOMAIN = "http://www.weijiaoyi.com";
 const LY_NOTIFY = "http://www.zhongyaoqihuo.com/notify/yl-notify";
 const OURS_NOTIFY = "http://www.zhongyaoqihuo.com/notify/ours-notify";
 //数据采集
-const STOCKET_URL = "http://ds.cnshuhai.com/stock.php";
+const STOCKET_URL = "http://df.cnshuhai.com/stock.php";
 const STOCKET_KURL = 'http://api.zb.cn/data/v1/kline';
-const STOCKET_USER = "hongyiqihuo";
-const WEB_STOCKET_URL = "http://ds.cnshuhai.com/stock.php?u=hongyiqihuo&type=kline";
-const WEB_STOCKET_URL2 = "http://ds.cnshuhai.com/stock.php?u=hongyiqihuo&type=stock&symbol=";
-const GAOPIN_URL = "http://ds.cnshuhai.com/stock.php?u=hongyiqihuo&type=kline";
+const STOCKET_USER = "wwwzzzzdd0599";
+const WEB_STOCKET_URL = "http://df.cnshuhai.com/stock.php?u=wwwzzzzdd0599&type=kline";
+const WEB_STOCKET_URL2 = "http://df.cnshuhai.com/stock.php?u=wwwzzzzdd0599&type=stock&symbol=";
+const GAOPIN_URL = "http://df.cnshuhai.com/stock.php?u=wwwzzzzdd0599&type=kline";
 /**
  * 路径别名定义
  */
