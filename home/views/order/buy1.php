@@ -264,9 +264,7 @@
                             <input id="_input" type="text" style="width:220px;position:absolute;left:0px;height:31px;"   onchange="setRuleContent1();"  placeholder="输入止损金额">
                         </div>
                         <script>
-
                             function asdq(aa){
-
                                 tempNums.zsprice = $(aa).attr('zshtml')
                                 $("#_input").val($(aa).attr('zshtml'))
                             }
@@ -274,10 +272,11 @@
                                 var dd = $('#_input').val()
                                 if (dd>0){
                                     ff_ = -Math.abs(dd)
-                                    $('#_input').valzshtml(ff_)
+                                    $('#_input').val(ff_)
                                 }
                                 tempNums.zsprice = -Math.abs(dd)
                                 $('#a2 option:selected').val(Math.abs(dd))
+
                             });
                             function setRuleContent(){
                                 var selectValue = $('#a2 option:selected').text();//选中select的内容
