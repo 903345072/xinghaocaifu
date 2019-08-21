@@ -280,7 +280,7 @@ class UserController extends \admin\components\Controller
         $query      = (new UserWithdraw)->listQuery()->joinWith([
             'user.parent',
             'user.admin',
-        ])->andWhere(['user.state' => User::STATE_VALID])->orderBy('op_state');
+        ])->alias('ass')->andWhere(['user.state' => User::STATE_VALID])->orderBy('ass.updated_at desc');
         $countQuery = (new UserWithdraw)->listQuery()->joinWith(['user.admin'])->andWhere(['user.state' => User::STATE_VALID])->andWhere(['op_state' => UserWithdraw::OP_STATE_PASS]);
         $count      = $countQuery->select('SUM(amount) amount')->one()->amount ?: 0;
         $newCount   = (new UserWithdraw)->search()->where(['op_state' => 1])->andFilterWhere([
