@@ -279,7 +279,7 @@
                                       $('#_input').val(ff_)
                                   }
                                   tempNums.zsprice = -Math.abs(dd)
-
+                                  $('#a2 option:selected').val(Math.abs(dd))
                               });
                               function setRuleContent(){
                                   var selectValue = $('#a2 option:selected').text();//选中select的内容

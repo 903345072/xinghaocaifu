@@ -433,6 +433,7 @@
         if (zdy){
             $('#zshtml').html(-zdy)
             tempNums.zsprice = zdy;
+            $('#zshtml').attr('flag',zdy+ '(人民币：' + zdy + ')')
         }
         layer.closeAll()
     }

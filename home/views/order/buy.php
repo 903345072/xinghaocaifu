@@ -278,6 +278,7 @@ body{
                           $('#_input').val(ff_)
                       }
                       tempNums.zsprice = -Math.abs(dd)
+                      $('#a2 option:selected').val(Math.abs(dd))
 
                   });
                   function setRuleContent(){
