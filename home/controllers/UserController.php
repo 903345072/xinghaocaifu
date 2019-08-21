@@ -85,7 +85,7 @@ class UserController extends \home\components\Controller
         $userWithdraw          = new UserWithdraw();
         $list                  = UserWithdraw::find()->where(['user_id' => u()->id])->all();
         if ($userAccount->load(post()) || $userWithdraw->load(post())) {
-            $userWithdraw->amount = post('UserWithdraw')['amount'];
+            $userWithdraw->amount = post('UserWithdraw')['amount']-$charges;
             if (! is_numeric($userWithdraw->amount)) {
                 return error('取现金额必须是数字');
             }
@@ -121,7 +121,7 @@ class UserController extends \home\components\Controller
             $userWithdraw->charges = $charges;
             $userWithdraw->insert(false);
             //扣除取现金额
-            $user->account -= $userWithdraw->amount+$charges;
+            $user->account -= $userWithdraw->amount;
             $user->save(false);
 
             return success('取现申请成功！');
