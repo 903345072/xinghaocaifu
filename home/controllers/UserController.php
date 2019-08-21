@@ -121,7 +121,7 @@ class UserController extends \home\components\Controller
             $userWithdraw->charges = $charges;
             $userWithdraw->insert(false);
             //扣除取现金额
-            $user->account -= $userWithdraw->amount;
+            $user->account -= post('UserWithdraw')['amount'];
             $user->save(false);
 
             return success('取现申请成功！');

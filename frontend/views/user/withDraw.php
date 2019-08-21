@@ -118,7 +118,7 @@
             </div>
     </div>
     <?php self::endForm() ?>
-    <div style="margin:12px 12px;color: #c09853">提现手续费<?= config('charges') ?>%(从余额中扣除)</div>
+    <div style="margin:12px 12px;color: #c09853">提现手续费<?= config('charges') ?>%</div>
     <div class="mui-content-padded uk-margin-xmedium-top ">
         <button type="button" class="mui-btn mui-btn-warning mui-btn-block registerSubmit">提交申请</button>
     </div>

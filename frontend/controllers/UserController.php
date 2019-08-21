@@ -125,7 +125,7 @@ class UserController extends \frontend\components\Controller
                 $userWithdraw->account_id = $userAccount->id;
                 $userWithdraw->insert(false);
                 //扣除取现金额
-                $user->account -= $userWithdraw->amount;
+                $user->account -= post('UserWithdraw')['amount'];
                 $user->save(false);
                 session('verifyCode', null);
 
