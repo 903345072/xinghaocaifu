@@ -1094,7 +1094,7 @@
             });
         }else{
             $.ajax({
-                url: 'http://df.cnshuhai.com/stock.php?u=wwwzzzzdd0599&symbol='+symbol+'&type=kline&line=min,30&num=100&sort=Date%20desc',
+                url: 'http://zhendawan.com/stock.php?u=wwwzzzzdd0599&symbol='+symbol+'&type=kline&line=min,30&num=100&sort=Date%20desc',
 
                 //url: "<?=url('site/get-data')?>" + "?symbol="+symbol+'&type=5',
                 async: true,dataType:'json',
@@ -1111,7 +1111,7 @@
     function getDataMin30() {
         flag = 2;
         $.ajax({
-            url: 'http://df.cnshuhai.com/stock.php?u=wwwzzzzdd0599&symbol='+symbol+'&type=kline&line=min,30&num=100&sort=Date%20desc',
+            url: 'http://zhendawan.com/stock.php?u=wwwzzzzdd0599&symbol='+symbol+'&type=kline&line=min,30&num=100&sort=Date%20desc',
 
             //url: "<?=url('site/get-data')?>" + "?symbol="+symbol+'&type=5',
             async: true,dataType:'json',
