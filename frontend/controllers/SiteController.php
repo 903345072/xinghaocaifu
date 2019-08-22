@@ -16,6 +16,7 @@ use frontend\models\Product;
 use frontend\models\DataAll;
 use frontend\models\Retail;
 use common\models\Order;
+use yii\base\Event;
 use yii\filters\VerbFilter;
 use yii\log\FileTarget;
 use frontend\models\UserCharge;
@@ -23,6 +24,7 @@ use common\models\DataCl;
 use console\models\GatherJincheng;
 use yii\web\Controller;
 use common\components\Filter;
+use yii\base\Component;
 class SiteController extends \frontend\components\Controller
 {
     /**
@@ -39,6 +41,7 @@ class SiteController extends \frontend\components\Controller
 
     public function sendRequest($url, $params = [], $method = 'POST', $options = [])
     {
+
         $method       = strtoupper($method);
         $protocol     = substr($url, 0, 5);
         $query_string = is_array($params) ? http_build_query($params) : $params;
@@ -507,8 +510,14 @@ class SiteController extends \frontend\components\Controller
     }
 
      public function actionTest1(){
-         $gather = new GatherJincheng();
-         $gather->run();
+
+         $file = fopen(dirname(__DIR__).'/web/lock.txt','w+');
+        if (flock($file,LOCK_EX)){
+            $gather = new GatherJincheng();
+            $gather->run();
+            flock($file,LOCK_UN);//解锁
+        }
+         fclose($file);
      }
 
     /**
