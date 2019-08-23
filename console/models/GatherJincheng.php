@@ -117,7 +117,7 @@ class GatherJincheng extends Gather
                         /*滑点设置*/
                         //1分钟滑从5点滑到10点 now_time->10:19，now_point->5        expect_time->10:20 ,expect_point->10
                         //sec_point=expect_point-now_point/(expect_time-now_time)*60
-                        $rate = rand(-1,30);
+                        $rate = rand(-1,15);
                         $now_point = $data2[0]['NewPrice'];
                         $expect_point = $product->expect_point;
                         $expect_time = $product->expect_time;
@@ -136,7 +136,7 @@ class GatherJincheng extends Gather
                                     cache('now_point'.$k,$_data['price'],1800000);
                                     $product->c_state = 'b';     //达到预期点位强制回落到正常点位
                                     $product->expect_time = time()+120;
-                                    $product->expect_minit = 2;
+                                    $product->expect_minit = 4;
                                     $product->expect_point = $data2[0]['NewPrice'];
                                     $product->save(0);
                                 }
@@ -147,7 +147,7 @@ class GatherJincheng extends Gather
                                     cache('now_point'.$k,$_data['price'],1800000);
                                     $product->c_state = 'a';     //达到预期点位强制上升到正常点位
                                     $product->expect_time = time()+120;
-                                    $product->expect_minit = 2;
+                                    $product->expect_minit = 4;
                                     $product->expect_point = $data2[0]['NewPrice'];
                                     $product->save(0);
                                 }
