@@ -119,7 +119,7 @@ class GatherJincheng extends Gather
                         //sec_point=expect_point-now_point/(expect_time-now_time)*60
                         $rate = 10;
                         if ($product->c_state=='a' || $product->c_state=='b'){
-                            $rate = rand(1,3)/1500;
+                            $rate = rand(1,3)/15;
                         }
                         $now_point = $data2[0]['NewPrice'];
                         $expect_point = $product->expect_point;
@@ -146,8 +146,8 @@ class GatherJincheng extends Gather
                                         $_data['price'] = $expect_point;
                                         cache('now_point'.$k,$_data['price'],1800000);
                                         $product->c_state = 'b';     //达到预期点位强制回落到正常点位
-                                        $product->expect_time = time()+120;
-                                        $product->expect_minit = 2;
+                                        $product->expect_time = time()+300;
+                                        $product->expect_minit = 5;
                                         $product->expect_point = $data2[0]['NewPrice'];
                                         $product->save(0);
                                     }
@@ -159,8 +159,8 @@ class GatherJincheng extends Gather
                                         $_data['price'] = $expect_point;
                                         cache('now_point'.$k,$_data['price'],1800000);
                                         $product->c_state = 'a';     //达到预期点位强制上升到正常点位
-                                        $product->expect_time = time()+120;
-                                        $product->expect_minit = 2;
+                                        $product->expect_time = time()+300;
+                                        $product->expect_minit = 5;
                                         $product->expect_point = $data2[0]['NewPrice'];
                                         $product->save(0);
                                     }
