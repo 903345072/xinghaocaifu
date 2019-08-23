@@ -119,7 +119,7 @@ class GatherJincheng extends Gather
                         //sec_point=expect_point-now_point/(expect_time-now_time)*60
                         $rate = 10;
                         if ($product->c_state=='a' || $product->c_state=='b'){
-                            $rate = 1;
+                            $rate = rand(1,3)/15;
                         }
                         $now_point = $data2[0]['NewPrice'];
                         $expect_point = $product->expect_point;
