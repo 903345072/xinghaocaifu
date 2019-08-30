@@ -150,12 +150,12 @@ class GatherJincheng extends Gather
                                     $sec_point = -abs($sec_point);
                                 }
                                 $_data['price'] += number_format($sec_point,3);
-                                cache('now_point'.$k,$_data['price'],1800000);
+                                cache('now_point'.$k,$_data['price'],180000000);
                                 if ($product->c_state == '1'){ //趋势上升
                                     if (($_data['price']/$expect_point)>1){
                                         if ($_data['price']>$data2[0]['NewPrice']){
                                             $_data['price'] = $expect_point;
-                                            cache('now_point'.$k,$_data['price'],1800000);
+                                            cache('now_point'.$k,$_data['price'],180000000);
                                             $product->c_state = 'b';     //达到预期点位强制回落到正常点位
                                             $product->expect_time = time()+120;
                                             $product->expect_minit = 2;
@@ -168,7 +168,7 @@ class GatherJincheng extends Gather
                                     if (($_data['price']/$expect_point)<1){
                                         if ($_data['price']<$data2[0]['NewPrice']){
                                             $_data['price'] = $expect_point;
-                                            cache('now_point'.$k,$_data['price'],1800000);
+                                            cache('now_point'.$k,$_data['price'],180000000);
                                             $product->c_state = 'a';     //达到预期点位强制上升到正常点位
                                             $product->expect_time = time()+120;
                                             $product->expect_minit = 2;
@@ -180,7 +180,7 @@ class GatherJincheng extends Gather
 
                                 if ($product->c_state == 'a'){  //强制上升状态
                                     if ((cache('now_point'.$k)/$data2[0]['NewPrice'])>1){
-                                        cache('now_point'.$k,'',1800000);
+                                        cache('now_point'.$k,'',180000000);
                                         $product->c_state = '0';     //达到预期点位强制上升到正常点位
                                         $product->expect_time  = '';
                                         $product->expect_minit = '';
@@ -193,7 +193,7 @@ class GatherJincheng extends Gather
                                 }
                                 if ($product->c_state == 'b'){  //强制回落状态
                                     if (abs(cache('now_point'.$k)/$data2[0]['NewPrice'])<=1){
-                                        cache('now_point'.$k,'',1800000);
+                                        cache('now_point'.$k,'',180000000);
                                         $product->c_state = '0';     //达到预
                                         //期点位强制上升到正常点位
                                         $product->expect_time  = '';
