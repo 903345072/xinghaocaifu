@@ -45,6 +45,7 @@ class Gather extends \yii\base\Object
                 $data['id'] = $row['id'];
                 $this->insert($name, $data,2);
             }
+
     }
     protected function insert($name, $data,$type)
     {
