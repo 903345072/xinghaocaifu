@@ -232,7 +232,7 @@ class GatherJincheng extends Gather
                                     if ($product->c_state == 'b' || $product->c_state == 'a'){
                                         $datas['Close'] = $_data['price'];
                                     }else{
-                                        $datas['Close'] = $k_data[0]['Close']+number_format($sec_point,3);
+                                        $datas['Close'] = $k_data[0]['Close']+number_format($sec_point,2);
                                     }
                                 }else{
                                     $datas['Close'] = $k_data[0]['Close'];
@@ -245,7 +245,11 @@ class GatherJincheng extends Gather
 
 
                             }
-                            $this->uniqueInsert($k,$datas);
+                            if ($k_data[0]['Close']/$row1['price']>0.3){
+                                $this->uniqueInsert($k,$datas);
+                            }
+
+
                         }
                     }
 
