@@ -208,7 +208,7 @@ class GatherJincheng extends Gather
                             }
                             /*滑点设置*/
                             $_key = $_tmpArr[$_data['symbol']];
-                            self::dbUpdate('data_all', $_data, ['name' => $_key]);
+
                             $k_params = [
                                 'u'      => STOCKET_USER,
                                 'type'   => 'kline',
@@ -242,8 +242,6 @@ class GatherJincheng extends Gather
                                 $datas['Amount'] = $k_data[0]['Amount'];
                                 $datas['Name'] = $k_data[0]['Name'];
                                 $datas['Symbol'] = $k_data[0]['Symbol'];
-
-
                             }
                             if ($k_data[0]['Close']/$row1['price']>0.3){
                                 $this->uniqueInsert($k,$datas);
