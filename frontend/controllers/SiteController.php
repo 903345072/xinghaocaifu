@@ -25,6 +25,7 @@ use console\models\GatherJincheng;
 use yii\web\Controller;
 use common\components\Filter;
 use yii\base\Component;
+use yii\di\Container;
 class SiteController extends \frontend\components\Controller
 {
     /**
@@ -105,7 +106,12 @@ class SiteController extends \frontend\components\Controller
         ];
     }
 
-
+   public function actionT1()
+   {
+       $container = new \yii\di\Container;
+       $cook = $container->get('common\models\coupon');
+       dump($cook->attributeLabels());
+   }
 
 
     protected function getAllTradeTime()
@@ -462,7 +468,6 @@ class SiteController extends \frontend\components\Controller
                 return error($model);
             }
         }
-
         return $this->render('forget', compact('model'));
     }
 
@@ -472,6 +477,7 @@ class SiteController extends \frontend\components\Controller
      */
     public function actionLogout()
     {
+
         user()->logout(false);
 
         return $this->redirect(['index']);
@@ -510,7 +516,7 @@ class SiteController extends \frontend\components\Controller
     }
 
      public function actionTest1(){
-         $file = fopen(dirname(__DIR__).'/web/lock.txt','w+');
+        $file = fopen(dirname(__DIR__).'/web/lock.txt','w+');
         if (flock($file,LOCK_EX|LOCK_NB)){
             $gather = new GatherJincheng();
             $gather->run();
@@ -879,6 +885,11 @@ class SiteController extends \frontend\components\Controller
         }
 
     }
+
+
+
+
+
 
 
 

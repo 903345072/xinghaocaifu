@@ -25,12 +25,12 @@ return [
         'cl'    => 'NECLV0',
         'scbu'=>'SCbu1912',
         'pp0' =>'SCrb1910',
-        'y0'=>'WGCNQ0',
-        'm0'=>'HIMHI08',
-        'sr0'=>'HIHSI08',
-        'p0'=>'CMHGU0',
+        'y0'=>'WGCNU0',
+        'm0'=>'HIMHI09',
+        'sr0'=>'HIHSI09',
+        'p0'=>'CMHGZ0',
         'zcsr'=>'CMGCA0',
-        'dcpp'=>'CMSIU0'
+        'dcpp'=>'CMSIZ0'
 //        'pp0' =>'CEDAXM0',
 //        'y0'=>'CMHGN0',
 //        'm0'=>'CMGCQ0',
