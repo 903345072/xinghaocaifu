@@ -108,9 +108,8 @@ class SiteController extends \frontend\components\Controller
 
    public function actionT1()
    {
-       $container = new \yii\di\Container;
-       $cook = $container->get('common\models\coupon');
-       dump($cook->attributeLabels());
+       cache('ccc','111');
+       echo cache('ccc');
    }
 
 

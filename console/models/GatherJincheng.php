@@ -208,7 +208,8 @@ class GatherJincheng extends Gather
                             }
                             /*滑点设置*/
                             $_key = $_tmpArr[$_data['symbol']];
-                          echo cache('now_point1',100);
+                          echo cache('now_point'.$k);
+
 
                             $k_params = [
                                 'u'      => STOCKET_USER,
@@ -260,6 +261,8 @@ class GatherJincheng extends Gather
 
 	}
 }
+
+
 
     public function getNewClose($symbol){
         $k_params = [
