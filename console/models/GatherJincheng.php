@@ -209,6 +209,7 @@ class GatherJincheng extends Gather
                             /*滑点设置*/
                             $_key = $_tmpArr[$_data['symbol']];
                             echo $_data['price'];
+                            echo '<br>';
                             echo cache('now_point'.$k);
                             $k_params = [
                                 'u'      => STOCKET_USER,
