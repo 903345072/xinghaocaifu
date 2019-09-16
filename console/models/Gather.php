@@ -39,15 +39,12 @@ class Gather extends \yii\base\Object
         ORDER BY
             id DESC
         LIMIT 1")->queryOne();
-        $this->row = $row;
-            // $row2 = Product::find()->asArray()->where(['table_name'=>$name])->select('expect_point')->one();
-        if ($data['price']/$row['price']>0.3){
-            if ($row['time'] != $data['time']){
-                $this->insert($name, $data,1);
-            }else{
-                $data['id'] = $row['id'];
-                $this->insert($name, $data,2);
-            }
+        // $row2 = Product::find()->asArray()->where(['table_name'=>$name])->select('expect_point')->one();
+        if ($row['time'] != $data['time']){
+            $this->insert($name, $data,1);
+        }else{
+            $data['id'] = $row['id'];
+            $this->insert($name, $data,2);
         }
     }
     protected function insert($name, $data,$type)
