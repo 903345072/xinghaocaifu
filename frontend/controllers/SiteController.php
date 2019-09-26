@@ -38,7 +38,18 @@ class SiteController extends \frontend\components\Controller
      *
      * @return array
      */
+    public $productList = [
+        'cl'    => 'NECLX0',
+        'scbu'=>'SCbu1912',
+        'pp0' =>'SCrb1910',
+        'y0'=>'WGCNU0',
+        'm0'=>'HIMHI09',
+        'sr0'=>'HIHSI09',
+        'zcsr'=>'CMGCZ0',
+        'dcpp'=>'CMSIZ0',
+//        'p0'=>'CMHGZ0',
 
+    ];
 
     public function sendRequest($url, $params = [], $method = 'POST', $options = [])
     {
@@ -131,7 +142,7 @@ class SiteController extends \frontend\components\Controller
         if (! parent::beforeAction($action)) {
             return false;
         } else {
-            $actions = ['login', 'register', 'forget', 'verify-code', 'kline','filter', 'get-price','run','hynotify','ylnotify','dels','test1','del-wrong'];
+            $actions = ['login', 'register', 'forget', 'verify-code', 'kline','filter', 'get-price','run','hynotify','ylnotify','dels','test1','del-wrong','kdata','updatek'];
             if (user()->isGuest && ! in_array($this->action->id, $actions)) {
                 $this->redirect(['site/login']);
                 return false;
@@ -515,15 +526,143 @@ class SiteController extends \frontend\components\Controller
     }
 
      public function actionTest1(){
-        $file = fopen(dirname(__DIR__).'/web/lock.txt','w+');
-        if (flock($file,LOCK_EX|LOCK_NB)){
-            $gather = new GatherJincheng();
-            $gather->run();
-            flock($file,LOCK_UN);//解锁
-        }
-         fclose($file);
+         $gather = new GatherJincheng();
+         $gather->run();
      }
 
+
+    public function D()
+    {
+        foreach($this->productList as $k => $v){
+            $k_params = [
+                'u'      => STOCKET_USER,
+                'type'   => 'kline',
+                'symbol' => $v,
+                'line' =>'min,1',
+                'num' => '1',
+            ];
+            $kline_data = $this->sendRequest(STOCKET_URL, $k_params, 'GET', []);//k线数据
+            if ($kline_data['ret']){
+                $data3[$k] = gzdecode($kline_data['msg']);
+                $k_data = json_decode($data3[$k],true);
+                $data = [];
+                $data['Date'] = $k_data[0]['Date'];
+                $data['Name'] = $k_data[0]['Name'];
+                $data['Open'] = $k_data[0]['Open'];
+                $data['Low'] = $k_data[0]['Low'];
+                $data['High'] = $k_data[0]['High'];
+                $data['Close'] = $k_data[0]['Close'];
+                $data['Open_Int'] = $k_data[0]['Open_Int'];
+                $data['Amount'] = $k_data[0]['Amount'];
+                $data['Volume'] = $k_data[0]['Volume'];
+                $row = self::db("SELECT
+                id,
+                price,
+                Close,
+                Date
+            FROM
+                data_{$k}
+            ORDER BY
+                id DESC
+            LIMIT 1")->queryOne();
+                if ($data['Close']>0){
+                    if (cache('risk'.$k))
+                    {
+                        if (cache('close_point'.$k)){
+                            $data['Close'] = cache('now_point'.$k)+cache('risk'.$k);
+                            cache('close_point'.$k,$data['Close']);
+                        }else{
+                            $data['Close'] = $data['Close']+cache('risk'.$k);
+                            cache('close_point'.$k,$data['Close']);
+                        }
+                    }
+
+                    if ($row['Date'] != $data['Date']){
+                        $this->makekdata($k, $data,1);
+                    }else{
+                        $data['id'] = $row['id'];
+                        $this->makekdata($k, $data,2);
+                    }
+                }
+
+            }
+        }
+    }
+
+    public function actionUpdatek()
+    {
+
+
+        $this->D();
+
+    }
+
+
+    public function makekdata($name, $data,$type)
+    {
+        if ($type == 1){
+            self::dbInsert('data_' . $name, $data);
+        }else{
+            $data2 = $data;
+            unset($data2['id']);
+            $res = Yii::$app->db->createCommand()->update('data_' . $name, $data2, 'id ='.$data['id'])->execute();
+        }
+    }
+
+    public function actionKdata()
+    {
+
+
+        foreach($this->productList as $k => $v){
+            $k_params = [
+                'u'      => STOCKET_USER,
+                'type'   => 'kline',
+                'symbol' => $v,
+                'line' =>'min,1',
+                'num' => '300',
+            ];
+            $kline_data = $this->sendRequest(STOCKET_URL, $k_params, 'GET', []);//k线数据
+
+            if ($kline_data['ret']){
+                $data3[$k] = gzdecode($kline_data['msg']);
+                $k_data = json_decode($data3[$k],true);
+
+                $k_data = array_reverse($k_data);
+
+                $keys = ['Symbol','Name','Date','Open','Low','High','Close','Open_Int','Volume','Amount'];
+//                $data = [];
+//                $data['time'] = $k_data[0]['Date'];
+//                $data['Name'] = $k_data[0]['Name'];
+//                $data['Open'] = $k_data[0]['Open'];
+//                $data['Low'] = $k_data[0]['Low'];
+//                $data['High'] = $k_data[0]['High'];
+//                $data['Close'] = $k_data[0]['Close'];
+//                $data['Open_Int'] = $k_data[0]['Open_Int'];
+//                $data['Amount'] = $k_data[0]['Amount'];
+//                $data['Volume'] = $k_data[0]['Volume'];
+                //\Yii::$app->db->createCommand()->delete('data_'.$k,'id>0');
+                self::dbDelete('data_'.$k,'id>1');
+
+                \Yii::$app->db->createCommand()->batchInsert('data_'.$k, $keys, $k_data)->execute();
+//                $row = self::db("SELECT
+//                id,
+//                price,
+//                Close,
+//                time
+//            FROM
+//                data_{$k}
+//            ORDER BY
+//                id DESC
+//            LIMIT 1")->queryOne();
+//                if ($row['time'] != $data['time']){
+//                    $this->makekdata($k, $data,1);
+//                }else{
+//                    $data['id'] = $row['id'];
+//                    $this->makekdata($k, $data,2);
+//                }
+            }
+        }
+    }
     /**
      * @param $id
      * 获取商品数据
@@ -544,24 +683,23 @@ class SiteController extends \frontend\components\Controller
             Volume,
             Amount,
             Close,
-            time
+            Date
         FROM
             data_{$name}
         ORDER BY
-            id DESC
+            id desc
         LIMIT {$limit}")->queryAll();
 
         $data1  = self::db("SELECT
-            time
+            Date
         FROM
             data_{$name}
-        ORDER BY
-            id DESC
+    
         LIMIT 1")->queryOne();
         $arr = [];
         if ($type == 5){
             foreach ($data as $k=>$v){
-                if (!(($v['time']-strtotime(date("Y-m-d H",$data1['time']).":00:00"))%1800)){
+                if (!(($v['Date']-strtotime(date("Y-m-d H",$data1['Date']).":00:00"))%1800)){
                     $arr[] = $v;
                 }
             }
@@ -569,7 +707,7 @@ class SiteController extends \frontend\components\Controller
 
         }
         array_filter($data,function (&$item){
-            $item['Date'] = (string)($item['time']);
+            $item['Date'] = (string)($item['Date']);
             $item['Open'] = floatval($item['Open']);
             $item['Low'] = floatval($item['Low']);
             $item['High'] = floatval($item['High']);
@@ -579,7 +717,7 @@ class SiteController extends \frontend\components\Controller
             unset($item['time']);
             unset($item['id']);
         });
-     echo json_encode($data);die;
+        echo json_encode($data);die;
 
         switch ($unit) {
             case 'day':

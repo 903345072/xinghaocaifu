@@ -34,35 +34,50 @@ class RiskController extends \admin\components\Controller
     public function actionRisk()
     {
         if (req()->isPost) {
-            session_start();
+
             $product = (new Product)->findModel(get('id'));
+            $tableName = $product->table_name;
             $risk = post('risk');
-            if (strpos($risk,'-') === false){
-                return error('请输入正确格式');
-            }
-            $risk = explode('-',$risk);
-            $risk[2] = time()+($risk[0]*60);
-            $obj = DataAll::find()->where(['symbol'=>$product->identify])->one();
-            $now_point = $obj->price;
-            if ($risk[1]>$now_point){  //上升趋势
-                $c_state = 1;
-            }elseif ($risk[1]<$now_point){
-                $c_state = 2; //下降趋势
-            }else{
-                $c_state = 2; //正常走势
-            }
-            list($product->expect_minit,$product->expect_point,$product->expect_time) = $risk;
-            $product->c_state = $c_state;
-            if ($product->update()){
-                return success();
-            } else {
-                return error($product);
-            }
+            cache('risk'.$tableName,$risk,1000000);
+            return success();
+//            session_start();
+//            $product = (new Product)->findModel(get('id'));
+//            $risk = post('risk');
+//            if (strpos($risk,'-') === false){
+//                return error('请输入正确格式');
+//            }
+//            $risk = explode('-',$risk);
+//            $risk[2] = time()+($risk[0]*60);
+//            $obj = DataAll::find()->where(['symbol'=>$product->identify])->one();
+//            $now_point = $obj->price;
+//            if ($risk[1]>$now_point){  //上升趋势
+//                $c_state = 1;
+//            }elseif ($risk[1]<$now_point){
+//                $c_state = 2; //下降趋势
+//            }else{
+//                $c_state = 2; //正常走势
+//            }
+//            list($product->expect_minit,$product->expect_point,$product->expect_time) = $risk;
+//            $product->c_state = $c_state;
+//            if ($product->update()){
+//                return success();
+//            } else {
+//                return error($product);
+//            }
         }
         $productArr = Product::getIndexProduct();
         return $this->render('risk', compact('productArr'));
     }
 
+
+    public function actionReset()
+    {
+            $product = (new Product)->findModel(get('id'));
+            $tableName = $product->table_name;
+            cache('risk'.$tableName,null);
+            cache('now_point'.$tableName,null);
+            return success();
+    }
 
 
     public function actionSetSlide($id)

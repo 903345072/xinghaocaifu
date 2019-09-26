@@ -811,6 +811,7 @@ body{
   var data60 = '';
   var curTab = 1;
   var symbol = '<?=$products->dataAll->symbol ?>';
+    var code = '<?=$products->dataAll->code ?>';
   var account = '1q2w3e4r5t6y7u8i';
   var goin3 = true;
 
@@ -1100,7 +1101,7 @@ body{
           });
       }else{
           $.ajax({
-              url: 'http://zhendawan.com/stock.php?u=wwwzzzzdd0599&symbol='+symbol+'&type=kline&line=min,30&num=100&sort=Date%20desc',
+              url: 'http://zhendawan.com/stock.php?u=wwwzzzzdd0599&symbol='+code+'&type=kline&line=min,30&num=100&sort=Date%20desc',
 
               //url: "<?=url('site/get-data')?>" + "?symbol="+symbol+'&type=5',
               async: true,dataType:'json',
@@ -1116,7 +1117,7 @@ body{
   function getDataMin30() {
       flag = 2;
     $.ajax({
-        url: 'http://zhendawan.com/stock.php?u=wwwzzzzdd0599&symbol='+symbol+'&type=kline&line=min,30&num=100&sort=Date%20desc',
+        url: 'http://zhendawan.com/stock.php?u=wwwzzzzdd0599&symbol='+code+'&type=kline&line=min,30&num=100&sort=Date%20desc',
 
         //url: "<?=url('site/get-data')?>" + "?symbol="+symbol+'&type=5',
       async: true,dataType:'json',

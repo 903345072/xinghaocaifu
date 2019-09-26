@@ -19,7 +19,6 @@ class Gather extends \yii\base\Object
     protected $switchMap = [];
 
     protected $faker;
-    public $row = [];
 
     public function init()
     {
@@ -33,21 +32,23 @@ class Gather extends \yii\base\Object
             id,
             price,
             Close,
-            time
+            Date
         FROM
             data_{$name}
         ORDER BY
             id DESC
         LIMIT 1")->queryOne();
-        // $row2 = Product::find()->asArray()->where(['table_name'=>$name])->select('expect_point')->one();
-        if ($row['time'] != $data['time']){
-            $this->insert($name, $data,1);
-        }else{
-            $data['id'] = $row['id'];
-            $this->insert($name, $data,2);
-        }
+
+          $this->insert($name,$data);
+
+//            if ($row['time'] != $data['time']){
+//                $this->insert($name, $data,1);
+//            }else{
+//                $data['id'] = $row['id'];
+//                $this->insert($name, $data,2);
+//            }
     }
-    protected function insert($name, $data,$type)
+    protected function insert($name, $data)
     {
         try {
             // 是否开启作弊模式
@@ -80,20 +81,10 @@ class Gather extends \yii\base\Object
                     $data['Open'] +=$wawe_point;
                 }
             }
-            if ($data['time']){
-                if ($type == 1){
-                    $res = self::dbInsert('data_' . $name, $data);
-                }else{
-                    $data2 = $data;
-                    unset($data2['id']);
-                    $res = Yii::$app->db->createCommand()->update('data_' . $name, $data2, 'id ='.$data['id'])->execute();
-                }
-            }
-            if ($res !== false) {
-                $this->updateMap[$name] = $data;
-            } else {
-                self::log($data, 'gather/' . $name);
-            }
+
+
+          $this->updateMap[$name] = $data;
+
         } catch (\yii\db\IntegrityException $e) {
             // 唯一索引冲突才会进这，什么都不必做
         }

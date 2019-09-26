@@ -192,7 +192,7 @@ class SiteController extends \home\components\Controller
             Volume,
             Amount,
             Close,
-            time
+            Date
         FROM
             data_{$name}
         ORDER BY
@@ -200,7 +200,7 @@ class SiteController extends \home\components\Controller
         LIMIT {$limit}")->queryAll();
 
         $data1  = self::db("SELECT
-            time
+            Date
         FROM
             data_{$name}
         ORDER BY
@@ -216,13 +216,14 @@ class SiteController extends \home\components\Controller
             $data = $arr;
         }
         array_filter($data,function (&$item){
-            $item['Date'] = (string)($item['time']);
+            $item['Date'] = (string)($item['Date']);
             $item['Open'] = floatval($item['Open']);
             $item['Low'] = floatval($item['Low']);
             $item['High'] = floatval($item['High']);
             $item['Close'] = floatval($item['Close']);
             $item['Volume'] = floatval($item['Volume']);
             $item['Amount'] = floatval($item['Amount']);
+            $item['price'] = floatval($item['Close']);
             unset($item['time']);
             unset($item['id']);
         });

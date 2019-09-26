@@ -18,59 +18,10 @@ class GatherJincheng extends Gather
         'y0'=>'WGCNU0',
         'm0'=>'HIMHI09',
         'sr0'=>'HIHSI09',
-        'p0'=>'CMHGZ0',
-        'zcsr'=>'CMGCA0',
-        'dcpp'=>'CMSIZ0'
-//        'pp0' =>'CEDAXM0',
-//        'y0'=>'CMHGN0',
-//        'm0'=>'CMGCQ0',
-//        'sr0'=>'HIHSI06',
-//        'p0'=>'CMSIN0'
-        //'a50'   => 'WGCNA0',
-        //'ixic'  => 'CENQA0',
-        //'bp'    => 'WICMBPA0',
-        //'ec'    => 'WICMECA0',
-        //'ad'    => 'WICMADA0',
-        //'cd'    => 'WICMCDA0',
+        'zcsr'=>'CMGCZ0',
+        'dcpp'=>'CMSIZ0',
+//        'p0'=>'CMHGZ0',
 
-        //'au0' => 'SCau0001',
-        //'ag0' => 'SCag0001',
-        //'cu0' => 'SCcu0001',
-        //'ni0' => 'SCni0001',
-        //'bu0' => 'SCbu0001',
-        //'ru0' => 'SCru0001',
-        //'rb0' => 'SCrb0001',
-        //'p0'  => 'DCp0001',
-        //'sr0' => 'ZCSR0001',
-        //'m0'  => 'DCm0001',
-        //'y0'  => 'DCy0001',
-        //'pp0' => 'DCpp0001',
-        //'cl'    => 'NECLN0',
-        //'gc'    => 'CMGCQ0',
-        //'si'    => 'CMSIN0',
-        //'hg'    => 'CMHGN0',
-        //'dax'   => 'CEDAXM0',
-        //'hkhsi' => 'HIHSI06',
-        //'mhi'   => 'HIMHI06',
-        //'a50'   => 'WGCNM0',
-        //'ixic'  => 'CENQU0',
-        //'bp'    => 'WICMBPM0',
-        //'ec'    => 'WICMECM0',
-        //'ad'    => 'WICMADA0',
-        //'cd'    => 'WICMCDM0',
-        //
-        //'au0' => 'SCau1812',
-        //'ag0' => 'SCag1812',
-        //'cu0' => 'SCcu1807',
-        //'ni0' => 'SCni1809',
-        //'bu0' => 'SCbu1812',
-        //'ru0' => 'SCru1809',
-        //'rb0' => 'SCrb1810',
-        //'p0'  => 'DCp1809',
-        //'sr0' => 'ZCSR1809',
-        //'m0'  => 'DCm1809',
-        //'y0'  => 'DCy1809',
-        //'pp0' => 'DCpp1809',
     ];
 
     public function __construct(array $config = [])
@@ -81,160 +32,340 @@ class GatherJincheng extends Gather
 
 
     public function run()
+     {
+
+         $products = Product::find()->where(['state' => 1, 'on_sale' => 1])->asArray()->all();
+         foreach($products as $k=>$v){
+             if($v['identify']=='btc'){
+                 $url = 'https://www.bitstamp.net/api/v2/ticker/btcusd?time='.time();
+             }elseif($v['identify']=='ltc'){
+                 $url = 'https://www.bitstamp.net/api/v2/ticker/ltcusd?time='.time();
+             }elseif ($v['identify']=='eth'){
+                 $url = 'https://www.bitstamp.net/api/v2/ticker/ethusd?time='.time();
+             }elseif ($v['identify']=='bch'){
+                 $url = 'https://www.bitstamp.net/api/v2/ticker/bchusd?time='.time();
+             }
+             elseif ($v['identify'] == 'sz399300'){
+                 $url = "http://web.sqt.gtimg.cn/q=".$v['identify']."?r=0.".time()*88;
+             }elseif ($v['identify'] == 'lls'){
+                 $url = "https://m.sojex.net/api.do?rtp=GetQuotesDetail&id=13";
+             }else{
+                 $url = 'http://hq.sinajs.cn/etag.php?_='.time().'1000&list='.$v['identify'];
+             }
+             $curl = curl_init();
+             curl_setopt($curl, CURLOPT_URL, $url);
+             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+             curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+             $result = curl_exec($curl);curl_close($curl);
+             $resultarr = explode(',', $result);
+
+             if(in_array($v['identify'], array('hf_CL','hf_SI', 'hf_GC', 'hf_SI', 'hf_NG','hf_JY', 'hf_EC', 'hf_HG', 'hf_CHA50CFD', 'hf_CAD', 'hf_HSI'))){
+
+                 $price = explode('"', $resultarr[0])[1];
+                 $diff = $price - $resultarr[7];
+                 if($diff == 0) {
+                     $diff_rate = 0.00;
+                 } else {
+                     $diff_rate = number_format($diff / $resultarr[7] * 100, 2, ".", "");
+                 }
+                 $data = [
+                     'price' => $price,
+                     'open' => $resultarr[8],
+                     'high' => $resultarr[4],
+                     'low' => $resultarr[5],
+                     'close' => $resultarr[7],
+                     'diff' => $diff,
+                     'diff_rate' => $diff_rate,
+                     'time' => date('Y-m-d H:i:s'),
+                     'symbol'=>$v['identify'],
+                     'bp'           => $resultarr[2],
+                     'sp'           => $resultarr[3],
+                     'bv'           => $resultarr[10],
+                     'sv'           => $resultarr[11],
+                     'date'         =>time()
+                 ];
+             }elseif ($v['identify'] == 'nf_BU0' || $v['identify'] == 'nf_RB0'){
+
+                 $data = [
+                     'price' => $resultarr[7],
+                     'open' => $resultarr[2],
+                     'high' => $resultarr[3],
+                     'low' => $resultarr[4],
+                     'close' => $resultarr[10],
+                     'diff' => $resultarr[6]-$resultarr[10],
+                     'diff_rate' => ($resultarr[6]-$resultarr[10])/$resultarr[10]*100,
+                     'time' => date('Y-m-d H:i:s'),
+                     'symbol'=>$v['identify'],
+                     'bp'           => $resultarr[7],
+                     'sp'           => $resultarr[8],
+                     'bv'           => $resultarr[11],
+                     'sv'           => $resultarr[12],
+                     'date'         =>time()
+                 ];
+             }elseif ($v['identify'] == 'hkHSI'){
+
+                 $price = $resultarr[6];
+                 $diff = $resultarr[7];
+                 $diff_rate = $resultarr[8];
+                 $dtime = strtotime($resultarr[sizeof($resultarr) - 2] ." " .explode('"', $resultarr[sizeof($resultarr) - 1])[0]);
+                 $data = [
+                     'price' => $price,
+                     'open' => $resultarr[2],
+                     'high' => $resultarr[4],
+                     'low' => $resultarr[5],
+                     'close' => $resultarr[3],
+                     'diff' => $diff,
+                     'diff_rate' => $diff_rate,
+                     'time' => date('Y-m-d H:i:s', time()),
+                     'symbol'=>$v['identify'],
+                     'bp'           => $price,
+                     'sp'           => $price,
+                     'bv'           => rand(1,100),
+                     'sv'           => rand(1,100),
+                     'date'         =>$dtime
+                 ];
+             }
+                 if (cache('risk'.$v['table_name']))
+                 {
+                     if (cache('now_point'.$v['table_name'])){
+                         $data['price'] = cache('now_point'.$v['table_name'])+cache('risk'.$v['table_name']);
+                         cache('now_point'.$v['table_name'],$data['price']);
+                     }else{
+                         $data['price'] = $data['price']+cache('risk'.$v['table_name']);
+                         cache('now_point'.$v['table_name'],$data['price']);
+                     }
+                 }
+
+               $res = self::dbUpdate('data_all', $data, ['symbol' =>$v['identify']]);
+
+               $this->uniqueInsert($v['table_name'],$data);
+               $this->listen();
+//                 $row = self::db("SELECT
+//			            price,
+//			            time
+//			        FROM
+//			            data_{$v['table_name']}
+//			        ORDER BY
+//			            id DESC
+//			        LIMIT 1")->queryOne();          //查出当当前产品最新的一条记录
+//                if (time()-$row['time']>60)
+//                {
+//                       //插入
+//
+//                }else{
+//                    //更新
+//                }
+
+         }
+
+
+
+//        $obj = new Product();
+//		foreach($this->productList as $k => $v){
+//        $params = [
+//            'u'      => STOCKET_USER,
+//            'type'   => 'stock',
+//            'symbol' => $v,
+//        ];
+//        $req = $this->sendRequest($this->url, $params, 'GET', []);
+//            if ($req['ret']){
+//                $data[$k] = gzdecode($req['msg']);
+//                $_data = $data2 = json_decode($data[$k],true);
+//                if ($_data[0]){
+//                    $_tmpArr = array_flip($this->productList);
+//                    $_data = [
+//                        'symbol'       => $_data[0]['Symbol'],
+//                        'product_name' => $_data[0]['Name'],
+//                        'price'        => $_data[0]['NewPrice'],
+//                        'time'         => date('Y-m-d H:i:s',$_data[0]['Date']),
+//                        'diff'         => '',
+//                        'diff_rate'    => $_data[0]['PriceChangeRatio'],
+//                        'open'         => $_data[0]['Open'],
+//                        'high'         => $_data[0]['High'],
+//                        'low'          => $_data[0]['Low'],
+//                        'close'        => $_data[0]['LastClose'],
+//                        'bp'           => $_data[0]['BP1'],
+//                        'sp'           => $_data[0]['SP1'],
+//                        'bv'           => $_data[0]['BV1'],
+//                        'sv'           => $_data[0]['SV1'],
+//                        'date'         => $_data[0]['Date'],
+//                    ];
+//                    if (!empty($_tmpArr[$_data['symbol']])) {
+//                        $product = $obj::findOne(['table_name'=>$k]);
+//                        /*滑点设置*/
+//                        //1分钟滑从5点滑到10点 now_time->10:19，now_point->5        expect_time->10:20 ,expect_point->10
+//                        //sec_point=expect_point-now_point/(expect_time-now_time)*60
+//                        $rate = 10;
+//                        if ($product->c_state=='a' || $product->c_state=='b'){
+//                            $rate = rand(1,5);
+//                        }
+//                        $now_point = $data2[0]['NewPrice'];
+//                        $expect_point = $product->expect_point;
+//                        $expect_time = $product->expect_time;
+//                        if ($expect_point){
+//                            if ($product->c_state=='b' || $product->c_state=='a'){
+//                                $_data['price'] = cache('now_point'.$k);
+//                                $now_point = cache('now_point'.$k);
+//                            }
+//
+//                            $sec_point = ($expect_point-$now_point)*$rate/($expect_time-time());
+//                            $_data['price'] += number_format($sec_point,3);
+//                            cache('now_point'.$k,$_data['price'],1800000);
+//                            if ($product->c_state == '1'){ //趋势上升
+//                                if (($_data['price']/$expect_point)>1){
+//                                    $_data['price'] = $expect_point;
+//                                    cache('now_point'.$k,$_data['price'],1800000);
+//                                    $product->c_state = 'b';     //达到预期点位强制回落到正常点位
+//                                    $product->expect_time = time()+120;
+//                                    $product->expect_minit = 2;
+//                                    $product->expect_point = $data2[0]['NewPrice'];
+//                                    $product->save(0);
+//                                }
+//                            }
+//                            if ($product->c_state == '2'){    //趋势下降
+//                                if (($_data['price']/$expect_point)<1){
+//                                    $_data['price'] = $expect_point;
+//                                    cache('now_point'.$k,$_data['price'],1800000);
+//                                    $product->c_state = 'a';     //达到预期点位强制上升到正常点位
+//                                    $product->expect_time = time()+120;
+//                                    $product->expect_minit = 2;
+//                                    $product->expect_point = $data2[0]['NewPrice'];
+//                                    $product->save(0);
+//                                }
+//                            }
+//
+//                            if ($product->c_state == 'a'){  //强制上升状态
+//                                if ((cache('now_point'.$k)/$data2[0]['NewPrice'])>1){
+//                                    cache('now_point'.$k,'',1800000);
+//                                    $product->c_state = '0';     //达到预期点位强制上升到正常点位
+//                                    $product->expect_time  = '';
+//                                    $product->expect_minit = '';
+//                                    $product->expect_point = '';
+//                                    $product->save(0);
+//                                }else{
+//                                    $product->expect_point = $data2[0]['NewPrice'];
+//                                    $product->save(0);
+//                                }
+//                            }
+//                            if ($product->c_state == 'b'){  //强制回落状态
+//                                echo abs(cache('now_point'.$k));
+//                                if (abs(cache('now_point'.$k)/$data2[0]['NewPrice'])<=1){
+//                                    cache('now_point'.$k,'',1800000);
+//                                    $product->c_state = '0';     //达到预
+//                                    //期点位强制上升到正常点位
+//                                    $product->expect_time  = '';
+//                                    $product->expect_minit = '';
+//                                    $product->expect_point = '';
+//                                    $product->save(0);
+//                                }else{
+//                                    $product->expect_point = $data2[0]['NewPrice'];
+//                                    $product->save(0);
+//                                }
+//                            }
+//                        }
+//                        /*滑点设置*/
+//                        $_key = $_tmpArr[$_data['symbol']];
+//                        self::dbUpdate('data_all', $_data, ['name' => $_key]);
+//                        $k_params = [
+//                            'u'      => STOCKET_USER,
+//                            'type'   => 'kline',
+//                            'symbol' => $v,
+//                            'line' =>'min,1',
+//                            'num' => '1'
+//                        ];
+//                        $kline_data = $this->sendRequest($this->url, $k_params, 'GET', []);//k线数据
+//
+//                        if ($kline_data['ret']){
+//                            $data3[$k] = gzdecode($kline_data['msg']);
+//                            $k_data =  json_decode($data3[$k],true);
+//
+//                                $datas['price'] = $_data['price'];
+//                                $datas['time']  = $k_data[0]['Date'];
+//                                $datas['creat_time'] = time();
+//                                $datas['Open'] = $k_data[0]['Open'];
+//                                $datas['Low'] = $k_data[0]['Low'];
+//                                $datas['High'] = $k_data[0]['High'];
+//                                if ($sec_point){
+//                                    if ($product->c_state == 'b' || $product->c_state == 'a'){
+//                                        $datas['Close'] = $_data['price'];
+//
+//                                    }else{
+//                                        $datas['Close'] = $k_data[0]['Close']+number_format($sec_point,3);
+//                                    }
+//                                }else{
+//                                    $datas['Close'] = $k_data[0]['Close'];
+//                                }
+//                                $datas['Open_Int'] = $k_data[0]['Open_Int'];
+//                                $datas['Volume'] = $k_data[0]['Volume'];
+//                                $datas['Amount'] = $k_data[0]['Amount'];
+//                                $datas['Name'] = $k_data[0]['Name'];
+//                                $datas['Symbol'] = $k_data[0]['Symbol'];
+//                        }
+//                        $this->uniqueInsert($k,$datas);
+//                    }
+//                    // 监听是否有人应该平仓
+//                    $this->listen();
+//
+//                }
+//            }
+//
+//	}
+}
+
+
+    public function kdata()
     {
-        $obj = new Product();
-        foreach($this->productList as $k => $v){
-            $params = [
+                $obj = new Product();
+		foreach($this->productList as $k => $v){
+
+            $k_params = [
                 'u'      => STOCKET_USER,
-                'type'   => 'stock',
+                'type'   => 'kline',
                 'symbol' => $v,
+                'line' =>'min,1',
+                'num' => '1'
             ];
-            $req = $this->sendRequest($this->url, $params, 'GET', []);
-            if ($req['ret']){
-                $data[$k] = gzdecode($req['msg']);
-                $_data = $data2 = json_decode($data[$k],true);
-                if ($_data[0]){
-                    $_tmpArr = array_flip($this->productList);
-                    $_data = [
-                        'symbol'       => $_data[0]['Symbol'],
-                        'product_name' => $_data[0]['Name'],
-                        'price'        => $_data[0]['NewPrice'],
-                        'time'         => date('Y-m-d H:i:s',$_data[0]['Date']),
-                        'diff'         => '',
-                        'diff_rate'    => $_data[0]['PriceChangeRatio'],
-                        'open'         => $_data[0]['Open'],
-                        'high'         => $_data[0]['High'],
-                        'low'          => $_data[0]['Low'],
-                        'close'        => $_data[0]['LastClose'],
-                        'bp'           => $_data[0]['BP1'],
-                        'sp'           => $_data[0]['SP1'],
-                        'bv'           => $_data[0]['BV1'],
-                        'sv'           => $_data[0]['SV1'],
-                        'date'         => $_data[0]['Date'],
-                    ];
-                    if (!empty($_tmpArr[$_data['symbol']])) {
-                        $product = $obj::findOne(['table_name'=>$k]);
-                        /*滑点设置*/
-                        //1分钟滑从5点滑到10点 now_time->10:19，now_point->5        expect_time->10:20 ,expect_point->10
-                        //sec_point=expect_point-now_point/(expect_time-now_time)*60
-                        $rate = 10;
-                        if ($product->c_state=='a' || $product->c_state=='b'){
-                            $rate = rand(1,5);
-                        }
-                        $now_point = $data2[0]['NewPrice'];
-                        $expect_point = $product->expect_point;
-                        $expect_time = $product->expect_time;
-                        if ($expect_point){
-                            if ($product->c_state=='b' || $product->c_state=='a'){
-                                $_data['price'] = cache('now_point'.$k);
-                                $now_point = cache('now_point'.$k);
-                            }
+            $kline_data = $this->sendRequest($this->url, $k_params, 'GET', []);//k线数据
 
-                            $sec_point = ($expect_point-$now_point)*$rate/($expect_time-time());
-                            $_data['price'] += number_format($sec_point,3);
-                            cache('now_point'.$k,$_data['price'],1800000);
-                            if ($product->c_state == '1'){ //趋势上升
-                                if (($_data['price']/$expect_point)>1){
-                                    $_data['price'] = $expect_point;
-                                    cache('now_point'.$k,$_data['price'],1800000);
-                                    $product->c_state = 'b';     //达到预期点位强制回落到正常点位
-                                    $product->expect_time = time()+120;
-                                    $product->expect_minit = 2;
-                                    $product->expect_point = $data2[0]['NewPrice'];
-                                    $product->save(0);
-                                }
-                            }
-                            if ($product->c_state == '2'){    //趋势下降
-                                if (($_data['price']/$expect_point)<1){
-                                    $_data['price'] = $expect_point;
-                                    cache('now_point'.$k,$_data['price'],1800000);
-                                    $product->c_state = 'a';     //达到预期点位强制上升到正常点位
-                                    $product->expect_time = time()+120;
-                                    $product->expect_minit = 2;
-                                    $product->expect_point = $data2[0]['NewPrice'];
-                                    $product->save(0);
-                                }
-                            }
+            if ($kline_data['ret']){
+                $data3[$k] = gzdecode($kline_data['msg']);
+                $k_data =  json_decode($data3[$k],true);
 
-                            if ($product->c_state == 'a'){  //强制上升状态
-                                if ((cache('now_point'.$k)/$data2[0]['NewPrice'])>1){
-                                    cache('now_point'.$k,'',1800000);
-                                    $product->c_state = '0';     //达到预期点位强制上升到正常点位
-                                    $product->expect_time  = '';
-                                    $product->expect_minit = '';
-                                    $product->expect_point = '';
-                                    $product->save(0);
-                                }else{
-                                    $product->expect_point = $data2[0]['NewPrice'];
-                                    $product->save(0);
-                                }
-                            }
-                            if ($product->c_state == 'b'){  //强制回落状态
-                                echo abs(cache('now_point'.$k));
-                                if (abs(cache('now_point'.$k)/$data2[0]['NewPrice'])<=1){
-                                    cache('now_point'.$k,'',1800000);
-                                    $product->c_state = '0';     //达到预
-                                    //期点位强制上升到正常点位
-                                    $product->expect_time  = '';
-                                    $product->expect_minit = '';
-                                    $product->expect_point = '';
-                                    $product->save(0);
-                                }else{
-                                    $product->expect_point = $data2[0]['NewPrice'];
-                                    $product->save(0);
-                                }
-                            }
-                        }
-                        /*滑点设置*/
-                        $_key = $_tmpArr[$_data['symbol']];
-                        self::dbUpdate('data_all', $_data, ['name' => $_key]);
-                        $k_params = [
-                            'u'      => STOCKET_USER,
-                            'type'   => 'kline',
-                            'symbol' => $v,
-                            'line' =>'min,1',
-                            'num' => '1'
-                        ];
-                        $kline_data = $this->sendRequest($this->url, $k_params, 'GET', []);//k线数据
-
-                        if ($kline_data['ret']){
-                            $data3[$k] = gzdecode($kline_data['msg']);
-                            $k_data =  json_decode($data3[$k],true);
-
-                            $datas['price'] = $_data['price'];
-                            $datas['time']  = $k_data[0]['Date'];
-                            $datas['creat_time'] = time();
-                            $datas['Open'] = $k_data[0]['Open'];
-                            $datas['Low'] = $k_data[0]['Low'];
-                            $datas['High'] = $k_data[0]['High'];
-                            if ($sec_point){
-                                if ($product->c_state == 'b' || $product->c_state == 'a'){
-                                    $datas['Close'] = $_data['price'];
-
-                                }else{
-                                    $datas['Close'] = $k_data[0]['Close']+number_format($sec_point,3);
-                                }
-                            }else{
-                                $datas['Close'] = $k_data[0]['Close'];
-                            }
-                            $datas['Open_Int'] = $k_data[0]['Open_Int'];
-                            $datas['Volume'] = $k_data[0]['Volume'];
-                            $datas['Amount'] = $k_data[0]['Amount'];
-                            $datas['Name'] = $k_data[0]['Name'];
-                            $datas['Symbol'] = $k_data[0]['Symbol'];
-                        }
-                        $this->uniqueInsert($k,$datas);
-                    }
-                    // 监听是否有人应该平仓
-                    $this->listen();
-
-                }
             }
-
-        }
+	       }
     }
 
-
+    public function curlfun($url, $params = array(), $method = 'GET')
+    {
+        $header = array();
+        $opts = array(CURLOPT_TIMEOUT => 10, CURLOPT_RETURNTRANSFER => 1, CURLOPT_SSL_VERIFYPEER => false, CURLOPT_SSL_VERIFYHOST => false, CURLOPT_HTTPHEADER => $header);
+        /* 根据请求类型设置特定参数 */
+        switch (strtoupper($method)) {
+            case 'GET' :
+                $opts[CURLOPT_URL] = $url . '?' . http_build_query($params);
+                $opts[CURLOPT_URL] = substr($opts[CURLOPT_URL],0,-1);
+                break;
+            case 'POST' :
+                //判断是否传输文件
+                $params = http_build_query($params);
+                $opts[CURLOPT_URL] = $url;
+                $opts[CURLOPT_POST] = 1;
+                $opts[CURLOPT_POSTFIELDS] = $params;
+                break;
+            default :
+        }
+        /* 初始化并执行curl请求 */
+        $ch = curl_init();
+        curl_setopt_array($ch, $opts);
+        $data = curl_exec($ch);
+        $error = curl_error($ch);
+        curl_close($ch);
+        if($error){
+            $data = null;
+        }
+        return $data;
+    }
 
     public function getNewClose($symbol){
         $k_params = [
