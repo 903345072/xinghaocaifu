@@ -14,10 +14,10 @@ class GatherJincheng extends Gather
     public $productList = [
         'cl'    => 'NECLX0',
         'scbu'=>'SCbu1912',
-        'pp0' =>'SCrb1910',
-        'y0'=>'WGCNU0',
-        'm0'=>'HIMHI09',
-        'sr0'=>'HIHSI09',
+        'pp0' =>'SCrb2001',
+        'y0'=>'WGCNV0',
+        'm0'=>'HIMHI10',
+        'sr0'=>'HIHSI10',
         'zcsr'=>'CMGCZ0',
         'dcpp'=>'CMSIZ0',
 //        'p0'=>'CMHGZ0',
@@ -44,8 +44,9 @@ class GatherJincheng extends Gather
                  $url = 'https://www.bitstamp.net/api/v2/ticker/ethusd?time='.time();
              }elseif ($v['identify']=='bch'){
                  $url = 'https://www.bitstamp.net/api/v2/ticker/bchusd?time='.time();
-             }
-             elseif ($v['identify'] == 'sz399300'){
+             }elseif ($v['identify']=='HIMHI10' || $v['identify']=='HIHSI10'){
+                  $url = WEB_STOCKET_URL2.$v['identify'];
+             }elseif ($v['identify'] == 'sz399300'){
                  $url = "http://web.sqt.gtimg.cn/q=".$v['identify']."?r=0.".time()*88;
              }elseif ($v['identify'] == 'lls'){
                  $url = "https://m.sojex.net/api.do?rtp=GetQuotesDetail&id=13";
@@ -58,7 +59,15 @@ class GatherJincheng extends Gather
              curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
              curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
              $result = curl_exec($curl);curl_close($curl);
-             $resultarr = explode(',', $result);
+             if ($v['identify'] == 'HIMHI10' || $v['identify'] == 'HIHSI10'){
+
+                 $result = gzdecode($result);
+                 $result = json_decode($result,1);
+                 $resultarr = $result[0];
+             }else{
+                 $resultarr = explode(',', $result);
+             }
+
 
              if(in_array($v['identify'], array('hf_CL','hf_SI', 'hf_GC', 'hf_SI', 'hf_NG','hf_JY', 'hf_EC', 'hf_HG', 'hf_CHA50CFD', 'hf_CAD', 'hf_HSI'))){
 
@@ -85,6 +94,24 @@ class GatherJincheng extends Gather
                      'sv'           => $resultarr[11],
                      'date'         =>time()
                  ];
+             }elseif ($v['identify'] == 'HIMHI10' || $v['identify'] == 'HIHSI10'){
+                 $data = [
+                     'price' => $resultarr[NewPrice],
+                     'open' => $resultarr[Open],
+                     'high' => $resultarr[High],
+                     'low' => $resultarr[Low],
+                     'close' => $resultarr[LastClose],
+                     'diff' => '',
+                     'diff_rate' => $resultarr[PriceChangeRatio],
+                     'time' => date('Y-m-d H:i:s'),
+                     'symbol'=>$v['identify'],
+                     'bp'           => $resultarr[BP1],
+                     'sp'           => $resultarr[SP1],
+                     'bv'           => $resultarr[BV1],
+                     'sv'           => $resultarr[SV1],
+                     'date'         =>$resultarr[Date]
+                 ];
+
              }elseif ($v['identify'] == 'nf_BU0' || $v['identify'] == 'nf_RB0'){
 
                  $data = [
