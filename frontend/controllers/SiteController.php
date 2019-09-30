@@ -526,8 +526,10 @@ class SiteController extends \frontend\components\Controller
     }
 
      public function actionTest1(){
-         $gather = new GatherJincheng();
-         $gather->run();
+
+             $gather = new GatherJincheng();
+             $gather->run();
+
      }
 
 
