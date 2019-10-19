@@ -147,16 +147,19 @@ FROM `order` o INNER JOIN product p on p.id = o.product_id INNER JOIN data_all a
         array_walk($ids, function ($value) use ($extra) {
             //最新价格
             $price = $value['price'];
-            if ($value['rise_fall'] == Order::RISE) {
-                if ($price >= $value['stop_profit_price'] || $price <= $value['stop_loss_price']) {
-                    Order::sellOrder($value['id'], true, $price);
-                }
-            } else {
+            if ($price>0){
+                if ($value['rise_fall'] == Order::RISE) {
+                    if ($price >= $value['stop_profit_price'] || $price <= $value['stop_loss_price']) {
+                        Order::sellOrder($value['id'], true, $price);
+                    }
+                } else {
 
-                if ($price <= $value['stop_profit_price'] || $price >= $value['stop_loss_price']) {
-                    Order::sellOrder($value['id'], true, $price);
+                    if ($price <= $value['stop_profit_price'] || $price >= $value['stop_loss_price']) {
+                        Order::sellOrder($value['id'], true, $price);
+                    }
                 }
             }
+
 
             if (in_array($value['product_id'], $extra)) {
                 Order::sellOrder($value['id'], true, $price);
