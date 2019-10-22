@@ -39,7 +39,7 @@ class SiteController extends \frontend\components\Controller
      * @return array
      */
     public $productList = [
-        'cl'    => 'NECLX0',
+        'cl'    => 'NECLZ0',
         'scbu'=>'SCbu1912',
         'pp0' =>'SCrb2001',
         'y0'=>'WGCNV0',
