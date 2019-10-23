@@ -48,13 +48,7 @@ class Product extends \common\models\Product
             $arr[$product->id]['id'] = $product->id;
             $arr[$product->id]['name'] = $product->name;
             $arr[$product->id]['table_name'] = $product->table_name;
-            if ($product->expect_point){
-                $arr[$product->id]['risk'] = $product->expect_minit.'分钟滑到'.$product->expect_point.'点';
-            }else{
-                $arr[$product->id]['risk'] = '';
-            }
-
-
+            $arr[$product->id]['risk'] = cache('risk'.$product->table_name);
         }
         return $arr;
     }

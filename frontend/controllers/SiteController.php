@@ -527,8 +527,19 @@ class SiteController extends \frontend\components\Controller
 
      public function actionTest1(){
 
+         $fp = fopen(Yii::getAlias('@frontend').'/web/lock.txt', "r");
+
+         if(flock($fp, LOCK_EX | LOCK_NB))
+         {
              $gather = new GatherJincheng();
              $gather->run();
+             sleep(5);
+             flock($fp,LOCK_UN);
+         } else {
+             echo 2;
+         }
+//关闭文件
+         fclose($fp);
 
      }
 
