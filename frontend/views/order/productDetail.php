@@ -221,7 +221,7 @@ html{
   getDataMin30();
   function getData() {
     $.ajax({
-//      url: "http://dy.cnshuhai.com/stock.php?u=test&symbol=BSbtcusd&type=kline&line=min,30&num=400&sort=Date%20desc",
+//      url: "http://zhendawan.com/stock.php?u=test&symbol=BSbtcusd&type=kline&line=min,30&num=400&sort=Date%20desc",
         url: "<?=url('site/get-data')?>" + "?symbol="+symbol,
         async: true,
         dataType:'json',
@@ -236,7 +236,7 @@ html{
   function getDataMin30() {
     $.ajax({
 
-         url: 'http://dy.cnshuhai.com/stock.php?u=wwwzzzzdd0599&symbol='+code+'&type=kline&line=min,30&num=100&sort=Date%20desc',
+         url: 'http://zhendawan.com/stock.php?u=wwwzzzzdd0599&symbol='+code+'&type=kline&line=min,30&num=100&sort=Date%20desc',
         //url: "<?=url('site/get-data')?>" + "?symbol="+symbol+'&type=5',
         async: true,
         dataType:'json',
@@ -249,7 +249,7 @@ html{
 
   function getDay() {
     $.ajax({
-//        url: "http://dy.cnshuhai.com/stock.php?u=test&symbol=BSbtcusd&type=kline&line=day&num=400&sort=Date%20desc",
+//        url: "http://zhendawan.com/stock.php?u=test&symbol=BSbtcusd&type=kline&line=day&num=400&sort=Date%20desc",
         url: "<?=url('site/get-data')?>" + "?symbol="+symbol,
       async: true,
       dataType:'json',
@@ -273,7 +273,7 @@ html{
 
   function getPriceFn() {
     $.ajax({
-//        url:"http://dy.cnshuhai.com/stock.php?u=test&market=BS&type=stock&symbol=BSbtcusd",
+//        url:"http://zhendawan.com/stock.php?u=test&market=BS&type=stock&symbol=BSbtcusd",
 
         url: "<?=url('site/get-fn')?>" + "?symbol="+symbol,
 
