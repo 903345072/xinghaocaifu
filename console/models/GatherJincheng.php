@@ -44,7 +44,7 @@ class GatherJincheng extends Gather
                  $url = 'https://www.bitstamp.net/api/v2/ticker/ethusd?time='.time();
              }elseif ($v['identify']=='bch'){
                  $url = 'https://www.bitstamp.net/api/v2/ticker/bchusd?time='.time();
-             }elseif ($v['identify']=='HIMHI10' || $v['identify']=='HIHSI10'){
+             }elseif ($v['identify']=='HIMHI10' || $v['identify']=='HIHSI11'){
                   $url = WEB_STOCKET_URL2.$v['identify'];
              }elseif ($v['identify'] == 'sz399300'){
                  $url = "http://web.sqt.gtimg.cn/q=".$v['identify']."?r=0.".time()*88;
@@ -59,7 +59,7 @@ class GatherJincheng extends Gather
              curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
              curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
              $result = curl_exec($curl);curl_close($curl);
-             if ($v['identify'] == 'HIMHI10' || $v['identify'] == 'HIHSI10'){
+             if ($v['identify'] == 'HIMHI11' || $v['identify'] == 'HIHSI11'){
 
                  $result = gzdecode($result);
                  $result = json_decode($result,1);
@@ -94,7 +94,7 @@ class GatherJincheng extends Gather
                      'sv'           => $resultarr[11],
                      'date'         =>time()
                  ];
-             }elseif ($v['identify'] == 'HIMHI10' || $v['identify'] == 'HIHSI10'){
+             }elseif ($v['identify'] == 'HIMHI11' || $v['identify'] == 'HIHSI11'){
                  $data = [
                      'price' => $resultarr[NewPrice],
                      'open' => $resultarr[Open],
