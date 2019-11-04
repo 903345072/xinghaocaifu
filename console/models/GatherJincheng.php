@@ -44,7 +44,7 @@ class GatherJincheng extends Gather
                  $url = 'https://www.bitstamp.net/api/v2/ticker/ethusd?time='.time();
              }elseif ($v['identify']=='bch'){
                  $url = 'https://www.bitstamp.net/api/v2/ticker/bchusd?time='.time();
-             }elseif ($v['identify']=='HIMHI10' || $v['identify']=='HIHSI11'){
+             }elseif ($v['identify']=='HIMHI11' || $v['identify']=='HIHSI11'){
                   $url = WEB_STOCKET_URL2.$v['identify'];
              }elseif ($v['identify'] == 'sz399300'){
                  $url = "http://web.sqt.gtimg.cn/q=".$v['identify']."?r=0.".time()*88;
