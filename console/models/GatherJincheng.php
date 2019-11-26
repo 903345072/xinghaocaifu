@@ -12,10 +12,10 @@ class GatherJincheng extends Gather
 
     // 交易产品列表
     public $productList = [
-        'cl'    => 'NECLX0',
+        'cl'    => 'NECLF0',
         'scbu'=>'SCbu1912',
         'pp0' =>'SCrb2001',
-        'y0'=>'WGCNV0',
+        'y0'=>'WGCNX0',
         'm0'=>'HIMHI11',
         'sr0'=>'HIHSI11',
         'zcsr'=>'CMGCZ0',
