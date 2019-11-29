@@ -11,18 +11,7 @@ class GatherJincheng extends Gather
     public $kurl = STOCKET_KURL;
 
     // 交易产品列表
-    public $productList = [
-        'cl'    => 'NECLF0',
-        'scbu'=>'SCbu1912',
-        'pp0' =>'SCrb2001',
-        'y0'=>'WGCNX0',
-        'm0'=>'HIMHI11',
-        'sr0'=>'HIHSI11',
-        'zcsr'=>'CMGCZ0',
-        'dcpp'=>'CMSIZ0',
-//        'p0'=>'CMHGZ0',
 
-    ];
 
     public function __construct(array $config = [])
     {
@@ -44,7 +33,7 @@ class GatherJincheng extends Gather
                  $url = 'https://www.bitstamp.net/api/v2/ticker/ethusd?time='.time();
              }elseif ($v['identify']=='bch'){
                  $url = 'https://www.bitstamp.net/api/v2/ticker/bchusd?time='.time();
-             }elseif ($v['identify']=='HIMHI11' || $v['identify']=='HIHSI11'){
+             }elseif ($v['identify']=='HIMHI12' || $v['identify']=='HIHSI12'){
                   $url = WEB_STOCKET_URL2.$v['identify'];
              }elseif ($v['identify'] == 'sz399300'){
                  $url = "http://web.sqt.gtimg.cn/q=".$v['identify']."?r=0.".time()*88;
@@ -59,7 +48,7 @@ class GatherJincheng extends Gather
              curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
              curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
              $result = curl_exec($curl);curl_close($curl);
-             if ($v['identify'] == 'HIMHI11' || $v['identify'] == 'HIHSI11'){
+             if ($v['identify'] == 'HIMHI12' || $v['identify'] == 'HIHSI12'){
 
                  $result = gzdecode($result);
                  $result = json_decode($result,1);
