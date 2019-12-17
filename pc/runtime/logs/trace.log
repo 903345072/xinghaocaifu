@@ -7852,3 +7852,126 @@ AND rc.table_name = 'user' AND kcu.table_name = 'user'
     in C:\code\xinghaocaifu\home\controllers\OrderController.php:793
 2019-09-30 16:58:46 [GET][http://localhost:89/order/positions?product_id=22&model_type=1][::1][100178][-][info][yii\db\Command::query] select id from `order` where user_id=100178 and order_state=1 and product_id=22 and model_type = 1
     in C:\code\xinghaocaifu\home\controllers\OrderController.php:798
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][trace][yii\base\Module::getModule] Loading module: wizard
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][trace][yii\base\Application::bootstrap] Bootstrap with common\modules\wizard\Module::bootstrap()
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][trace][yii\base\Application::bootstrap] Bootstrap with yii\log\Dispatcher
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][trace][yii\web\UrlManager::parseRequest] No matching URL rules. Using default URL parsing logic.
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][trace][yii\web\Application::handleRequest] Route requested: ''
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: site/index
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: home\controllers\SiteController::actionIndex()
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][info][yii\db\Command::query] SELECT * FROM `product` `product` WHERE (`on_sale`=1) AND (`state`=1) AND (`type`=1) ORDER BY `hot` DESC
+    in C:\code\xinghaocaifu\home\models\Product.php:55
+    in C:\code\xinghaocaifu\home\controllers\SiteController.php:33
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=xinghao
+    in C:\code\xinghaocaifu\home\models\Product.php:55
+    in C:\code\xinghaocaifu\home\controllers\SiteController.php:33
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][info][yii\db\Command::query] SELECT * FROM `product` `product` WHERE (`on_sale`=1) AND (`state`=1) AND (`type`=2) ORDER BY `hot` DESC
+    in C:\code\xinghaocaifu\home\models\Product.php:92
+    in C:\code\xinghaocaifu\home\controllers\SiteController.php:35
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][info][yii\web\Session::open] Session started
+    in C:\code\xinghaocaifu\common\components\Session.php:59
+    in C:\code\xinghaocaifu\common\functions\Yii_func.php:14
+    in C:\code\xinghaocaifu\common\behaviors\ARSaveBehavior.php:47
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `product`
+    in C:\code\xinghaocaifu\home\models\Product.php:92
+    in C:\code\xinghaocaifu\home\controllers\SiteController.php:35
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][info][yii\db\Command::query] SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'product' AND kcu.table_name = 'product'
+    in C:\code\xinghaocaifu\home\models\Product.php:92
+    in C:\code\xinghaocaifu\home\controllers\SiteController.php:35
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][info][yii\db\Command::query] SELECT * FROM `data_all` `dataAll` WHERE `name` IN ('cl', 'scbu', 'zcsr', 'dcpp', 'sr0', 'm0', 'y0', 'pp0')
+    in C:\code\xinghaocaifu\home\models\Product.php:92
+    in C:\code\xinghaocaifu\home\controllers\SiteController.php:35
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `data_all`
+    in C:\code\xinghaocaifu\home\models\Product.php:92
+    in C:\code\xinghaocaifu\home\controllers\SiteController.php:35
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][info][yii\db\Command::query] SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'data_all' AND kcu.table_name = 'data_all'
+    in C:\code\xinghaocaifu\home\models\Product.php:92
+    in C:\code\xinghaocaifu\home\controllers\SiteController.php:35
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][info][yii\db\Command::query] SELECT * FROM `product` `product` WHERE `id`=1
+    in C:\code\xinghaocaifu\common\models\Product.php:188
+    in C:\code\xinghaocaifu\home\models\Product.php:95
+    in C:\code\xinghaocaifu\home\controllers\SiteController.php:35
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][info][yii\db\Command::query] SELECT * FROM `product` `product` WHERE `id`=26
+    in C:\code\xinghaocaifu\common\models\Product.php:188
+    in C:\code\xinghaocaifu\home\models\Product.php:95
+    in C:\code\xinghaocaifu\home\controllers\SiteController.php:35
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][info][yii\db\Command::query] SELECT * FROM `product` `product` WHERE `id`=27
+    in C:\code\xinghaocaifu\common\models\Product.php:188
+    in C:\code\xinghaocaifu\home\models\Product.php:95
+    in C:\code\xinghaocaifu\home\controllers\SiteController.php:35
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][info][yii\db\Command::query] SELECT * FROM `product` `product` WHERE `id`=28
+    in C:\code\xinghaocaifu\common\models\Product.php:188
+    in C:\code\xinghaocaifu\home\models\Product.php:95
+    in C:\code\xinghaocaifu\home\controllers\SiteController.php:35
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][info][yii\db\Command::query] SELECT * FROM `product` `product` WHERE `id`=22
+    in C:\code\xinghaocaifu\common\models\Product.php:188
+    in C:\code\xinghaocaifu\home\models\Product.php:95
+    in C:\code\xinghaocaifu\home\controllers\SiteController.php:35
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][info][yii\db\Command::query] SELECT * FROM `product` `product` WHERE `id`=23
+    in C:\code\xinghaocaifu\common\models\Product.php:188
+    in C:\code\xinghaocaifu\home\models\Product.php:95
+    in C:\code\xinghaocaifu\home\controllers\SiteController.php:35
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][info][yii\db\Command::query] SELECT * FROM `product` `product` WHERE `id`=24
+    in C:\code\xinghaocaifu\common\models\Product.php:188
+    in C:\code\xinghaocaifu\home\models\Product.php:95
+    in C:\code\xinghaocaifu\home\controllers\SiteController.php:35
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][info][yii\db\Command::query] SELECT * FROM `product` `product` WHERE `id`=25
+    in C:\code\xinghaocaifu\common\models\Product.php:188
+    in C:\code\xinghaocaifu\home\models\Product.php:95
+    in C:\code\xinghaocaifu\home\controllers\SiteController.php:35
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][info][yii\db\Command::query] SELECT * FROM `article` `article` ORDER BY `publish_time` DESC
+    in C:\code\xinghaocaifu\home\controllers\SiteController.php:36
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `article`
+    in C:\code\xinghaocaifu\home\controllers\SiteController.php:36
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][info][yii\db\Command::query] SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'article' AND kcu.table_name = 'article'
+    in C:\code\xinghaocaifu\home\controllers\SiteController.php:36
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][trace][yii\base\View::renderFile] Rendering view file: C:\code\xinghaocaifu\pc\views\site\index.php
+    in C:\code\xinghaocaifu\home\controllers\SiteController.php:37
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][info][yii\db\Command::query] SELECT option_value FROM `option` WHERE option_name='frontend_settings'
+    in C:\code\xinghaocaifu\common\modules\setting\models\Setting.php:129
+    in C:\code\xinghaocaifu\common\modules\setting\models\Setting.php:120
+    in C:\code\xinghaocaifu\common\components\Config.php:25
+2019-12-17 15:57:12 [GET][http://localhost:89/][127.0.0.1][-][-][trace][yii\base\View::renderFile] Rendering view file: C:\code\xinghaocaifu\pc\views\layouts\web_main.php
+    in C:\code\xinghaocaifu\home\controllers\SiteController.php:37

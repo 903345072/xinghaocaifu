@@ -1155,8 +1155,8 @@
                 var ZD = (ret.NewPrice - ret.LastClose);
                 var ZDL = ZD / ret.LastClose * 100;
 
-                $('#price1').html(ret.SP1);
-                $('#price2').html(ret.BP1);
+                $('#price1').html(ret.NewPrice);
+                $('#price2').html(ret.NewPrice);
                 $('#price3').html(ret.NewPrice);
                 $('.nowprice').html(ret.NewPrice);
                 $('#price4').html(ZD.toFixed(2));
