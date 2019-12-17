@@ -45,8 +45,8 @@ class SiteController extends \frontend\components\Controller
         'y0'=>'WGCNZ0',
         'm0'=>'HIMHI12',
         'sr0'=>'HIHSI12',
-        'zcsr'=>'CMGCZ0',
-        'dcpp'=>'CMSIZ0',
+        'zcsr'=>'CMGCG0',
+        'dcpp'=>'CMSIH0',
 //        'p0'=>'CMHGZ0',
 
     ];
