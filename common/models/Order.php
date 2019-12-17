@@ -274,7 +274,7 @@ class Order extends \common\components\ARModel
 
         if ($order->rise_fall == self::RISE) { // 买涨
             // 订单当前买入价
-            $order->price = $dataAll->sp;
+            $order->price = $dataAll->price;
 
             $order->stop_profit_price = $order->price + ($stop_profit_point * $productPrice->point_unit) / $hands;
             $order->stop_profit_point = $stop_profit_point;
@@ -282,7 +282,7 @@ class Order extends \common\components\ARModel
             $order->stop_loss_point   = $stop_loss_point;
         } else { // 买跌
             // 订单当前买入价
-            $order->price = $dataAll->bp;
+            $order->price = $dataAll->price;
 
             $order->stop_profit_price = $order->price - ($stop_profit_point * $productPrice->point_unit) / $hands;
             $order->stop_profit_point = $stop_profit_point;
